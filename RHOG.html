@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RHOG STUDIO - Graphic Design & Large Printing</title>
+<link rel="stylesheet" href="./RHOG.css">
+</head>
+<body>
+<header>
+<img class="Logo" src="RHOG LOGO.png" alt="">
+  <span>RHOG STUDIO</span>
+  <nav>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+</header>
+<section class="hero" aria-label="Introduction Section">
+  <h2>Graphic Design & Large Printing Excellence</h2>
+  <p>...with a speed of divine ideas</p>
+  <button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get in Touch</button>
+</section>
+
+<main>
+  <section id="about" class="about">
+    <h3>About RHOG STUDIO</h3>
+    <p>RHOG STUDIO is a premier Graphic Design and Large Printing Company dedicated to delivering high-quality, creative solutions to bring your brand to life. With cutting-edge technology and a passionate design team, we ensure every project stands out with elegance and impact.</p>
+  </section>
+
+  <section id="services" class="services-section">
+    <h3>Our Services</h3>
+    <div class="services" role="list">
+      <article class="service-card" role="listitem" tabindex="0">
+        <div class="service-icon" aria-hidden="true">🎨</div>
+        <h4 class="service-title">Graphic Design</h4>
+          <button><a href="Portfolio images.html">.</a>DESIGNS</button>
+        <p class="service-desc">Custom logos, branding, marketing materials, and creative visuals tailored to your business needs.</p>
+      </article>
+      
+      <article class="service-card" role="listitem" tabindex="0">
+        <div class="service-icon" aria-hidden="true">🖨️</div>
+        <h4 class="service-title">Large Format Printing</h4>
+        <button><a href="Portfolio Video.html">.</a>VIDEOS</button>
+        <p class="service-desc">Banners, posters, vehicle wraps, and signs with vibrant colors and durable finishes for indoor and outdoor use.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <h3>Contact Us</h3>
+    <!-- <form id="contact-form" aria-label="Contact form">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required aria-required="true" placeholder="Your full name" />
+      
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required aria-required="true" placeholder="you@example.com" />
+      
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="5" required aria-required="true" placeholder="Your message here..."></textarea>
+      
+      
+       <input type="submit" id="button" value="Send Email" >
+</form>
+
+<script type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script type="text/javascript">
+  emailjs.init('lHLaPI0sQ2Zt_Fy0Y')
+</script> -->
+ <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
+<!-- HTML Form -->
+<form id="contact-form">
+  <input type="text" name="from_name" placeholder="Your Name" required><br>
+  <input type="email" name="from_email" placeholder="Your Email" required><br>
+  <textarea name="message" placeholder="Your Message" required></textarea><br>
+  <button type="submit">Send Email</button> <br>
+</form>
+    <div style="display: flex; align-items: center; gap: 40px;">
+      <img src="C.E.O.jpg" alt="profile" class="circle-image">
+       <P> My name is Oyetunji Ebenezer, the CEO, and I’m glad 
+        you stopped by! We specialize in graphic design <br>
+        and printing, offering high-quality, creative 
+        solutions to bring your ideas to life. From eye-catching <br>
+        designs to professional prints, we’re here to make your
+        brand stand out. Thank you for visiting our site your support 
+        means everything,and I look forward to working 
+        with you!</P>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  &copy; 2025 RHOG STUDIO. All rights reserved.
+</footer>
+
+<!-- Lightbox for portfolio -->
+<div id="lightbox-overlay" role="dialog" aria-modal="true" aria-hidden="true">
+  <div id="lightbox-content">
+    <button id="lightbox-close" aria-label="Close">&times;</button>
+    <!-- Dynamic content (image/video) inserted here -->
+  </div>
+</div>
+
+<script>
+  // Handle basic contact form submission with validation feedback
+  const form = document.getElementById('contact-form');
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    if(!form.checkValidity()) {
+      alert('Please fill out all required fields correctly.');
+      return;
+    }
+    alert('Thank you for reaching out! We will get back to you soon.');
+    form.reset();
+  });
+
+
+  // Portfolio lightbox logic
+  const lightboxOverlay = document.getElementById('lightbox-overlay');
+  const lightboxContent = document.getElementById('lightbox-content');
+  const closeBtn = document.getElementById('lightbox-close');
+
+  // Restore focus to last focused portfolio item after closing lightbox
+  let lastFocusedElement = null;
+
+  function openLightbox(type, src) {
+    lastFocusedElement = document.activeElement;
+    lightboxContent.querySelectorAll('img, video').forEach(e => e.remove());
+
+    if (type === 'image') {
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = 'Expanded portfolio image';
+      lightboxContent.appendChild(img);
+    } else if (type === 'video') {
+      const video = document.createElement('video');
+      video.src = src;
+      video.controls = true;
+      video.autoplay = true;
+      video.style.maxHeight = '90vh';
+      lightboxContent.appendChild(video);
+    }
+    lightboxOverlay.classList.add('active');
+    lightboxOverlay.setAttribute('aria-hidden', 'false');
+    closeBtn.focus();
+  }
+
+  function closeLightbox() {
+    lightboxOverlay.classList.remove('active');
+    lightboxOverlay.setAttribute('aria-hidden', 'true');
+    if(lastFocusedElement) lastFocusedElement.focus();
+  }
+
+  closeBtn.addEventListener('click', closeLightbox);
+  lightboxOverlay.addEventListener('click', (e) => {
+    if(e.target === lightboxOverlay) {
+      closeLightbox();
+    }
+  });
+
+  // Keyboard support: Esc to close lightbox
+  document.addEventListener('keydown', (e) => {
+    if(e.key === "Escape" && lightboxOverlay.classList.contains('active')){
+      closeLightbox();
+    }
+  });
+
+  // Attach event listeners to portfolio items
+  document.querySelectorAll('.portfolio-item').forEach(item => {
+    item.addEventListener('click', () => {
+      openLightbox(item.dataset.type, item.dataset.src);
+    });
+    item.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openLightbox(item.dataset.type, item.dataset.src);
+      }
+    });
+ 
+//  const btn = document.getElementById('button');
+
+// document.getElementById('form')
+//  .addEventListener('submit', function(event) {
+//    event.preventDefault();
+
+//    btn.value = 'Sending...';
+
+//    const serviceID = 'service_5rqt66q';
+//    const templateID = 'template_0ssg2db';
+
+//    emailjs.sendForm(serviceID, templateID, this)
+//     .then(() => {
+//       btn.value = 'Send Email';
+//       alert('Sent!');
+//     }, (err) => {
+//       btn.value = 'Send Email';
+//       alert(JSON.stringify(err));
+//     });
+// });
+
+  (function() {
+    emailjs.init("lHLaPI0sQ2Zt_Fy0Y"); // Replace with your EmailJS public key
+  })();
+
+  document.getElementById("contact-form").addEventListener("submit", function(e) {
+    e.preventDefault(); // Prevent default form submission
+
+    emailjs.sendForm("service_5rqt66q", "template_0ssg2db", this)
+      .then(function(response) {
+        alert("Email sent successfully!");
+      }, function(error) {
+        alert("Failed to send email. Error: " + JSON.stringify(error));
+      });
+  });
+
+  });
+</script>
+</body>
+</html>
+
