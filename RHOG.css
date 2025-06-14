@@ -1,32 +1,35 @@
 /* Color palette */
-  :root {
+:root {
     --gold: #d4af37;
     --black: #000000;
     --white: #ffffff;
-  }
+}
 
-  /* Reset and base styles */
-  * {
+/* Reset and base styles */
+* {
     box-sizing: border-box;
-  }
-  
-  body {
+}
+
+body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--black);
     color: var(--white);
     line-height: 1.6;
-  }
-  a {
+}
+
+a {
     color: var(--gold);
     text-decoration: none;
-  }
-  a:hover,
-  a:focus {
-    text-decoration: underline;
-  }
+}
 
-  header {
+a:hover,
+a:focus {
+    text-decoration: underline;
+}
+
+/* Header */
+header {
     background-color: var(--black);
     border-bottom: 3px solid var(--gold);
     padding: 1rem 2rem;
@@ -36,37 +39,46 @@
     position: sticky;
     top: 0;
     z-index: 100;
-  }
+}
 
-  header .Logo {
-    height: 16vh;
+header .Logo {
+    height: 12vh; /* Adjusted for smaller screens by default */
+    max-height: 80px; /* Max height for logo */
+    width: auto;
     text-align: center;
-    padding: 0 1rem;
-  }
-  header span {
+    padding-right: 1rem;
+}
+
+header span {
     font-weight: 800;
-    font-size: 1.4rem;
-    letter-spacing: 3px;
+    font-size: 1.2rem; /* Adjusted for smaller screens */
+    letter-spacing: 2px;
     color: var(--gold);
-  }
-  nav ul {
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+nav {
+    margin-left: auto; /* Push nav to the right */
+}
+
+nav ul {
     list-style: none;
     display: flex;
     justify-content: flex-end;
-    gap: 2rem;
+    gap: 1.5rem; /* Adjusted gap for mobile */
     margin: 0;
-    padding: 70;
-  }
-  nav ul li {
-    font-weight: 600;
-    font-size: 1rem;
-  }
+    padding: 0;
+}
 
-  .hero {
-    background: linear-gradient(rgba(0,0,0,0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80') center/cover no-repeat;
-    background-image: url("lannding\ page.jpeg");
-    background-size: 1500px 700px;
-    background-repeat: no-repeat;
+nav ul li {
+    font-weight: 600;
+    font-size: 0.9rem; /* Adjusted for mobile */
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0, 0, 0, 0.7)), url('lannding page.jpeg') center/cover no-repeat;
+    background-size: cover; /* Ensure it covers the area */
     background-position: center;
     height: 80vh;
     color: var(--gold);
@@ -76,52 +88,60 @@
     align-items: center;
     text-align: center;
     padding: 0 1rem;
-  }
-  h2{
+}
+
+.hero h2 {
     box-shadow: 5px 5px 10px rgb(0, 0, 0);
-  }
-  .hero h2 {
-    font-size: 3.4rem;
+    font-size: 2.5rem; /* Adjusted for smaller screens */
     margin-bottom: 0.5rem;
     font-weight: 900;
     text-transform: uppercase;
-    letter-spacing: 4px;
-  }
-  .hero p {
-    font-size: 1.4rem;
+    letter-spacing: 3px; /* Adjusted for smaller screens */
+    padding: 0.5rem 1rem; /* Added padding for better visual */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for text */
+    border-radius: 8px;
+}
+
+.hero p {
+    font-size: 1.2rem; /* Adjusted for smaller screens */
     max-width: 650px;
     font-weight: 500;
-  }
-  .hero button {
-    margin-top: 2rem;
+    padding: 0 1rem; /* Added padding */
+}
+
+.hero button {
+    margin-top: 1.5rem; /* Adjusted margin */
     background-color: var(--gold);
     border: none;
-    padding: 0.75rem 2.5rem;
-    font-size: 1.1rem;
+    padding: 0.75rem 2rem; /* Adjusted padding */
+    font-size: 1rem; /* Adjusted font size */
     font-weight: 700;
     color: var(--black);
     border-radius: 60px;
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(212, 175, 55, 0.6);
     transition: background-color 0.3s ease;
-  }
-  .hero button:hover,
-  .hero button:focus {
+}
+
+.hero button:hover,
+.hero button:focus {
     background-color: #b28e22;
     outline: none;
-  }
+}
 
-  main {
-    padding: 3rem 2rem;
+/* Main Content */
+main {
+    padding: 2rem 1rem; /* Adjusted padding for smaller screens */
     max-width: 1200px;
     margin: 0 auto;
-  }
+}
 
-  section {
-    margin-bottom: 4rem;
-  }
-  section h3 {
-    font-size: 2.2rem;
+section {
+    margin-bottom: 3rem; /* Adjusted margin */
+}
+
+section h3 {
+    font-size: 1.8rem; /* Adjusted for smaller screens */
     font-weight: 800;
     color: var(--gold);
     margin-bottom: 1rem;
@@ -130,150 +150,192 @@
     border-bottom: 3px solid var(--gold);
     display: inline-block;
     padding-bottom: 0.3rem;
-  }
+}
 
-  .about p {
-    font-size: 1.1rem;
+.about p {
+    font-size: 1rem; /* Adjusted for smaller screens */
     max-width: 800px;
     margin: 0 auto;
     color: #f0f0f0;
     line-height: 1.7;
-  }
+}
 
-  .services {
+/* Services Section */
+.services {
     display: flex;
-    gap: 3rem;
+    gap: 2rem; /* Adjusted gap */
     flex-wrap: wrap;
     justify-content: center;
-  }
-  .service-card {
+}
+
+.service-card {
     background-color: var(--black);
     border: 2px solid var(--gold);
-    padding: 2rem;
-    max-width: 350px;
-    flex: 1 1 300px;
+    padding: 1.5rem; /* Adjusted padding */
+    max-width: 300px; /* Adjusted max-width */
+    flex: 1 1 280px; /* Allow more flexibility for smaller screens */
     text-align: center;
     box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
     border-radius: 10px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .service-card:hover,
-  .service-card:focus-within {
+}
+
+.service-card:hover,
+.service-card:focus-within {
     box-shadow: 0 0 25px rgba(212, 175, 55, 0.7);
     transform: translateY(-6px);
-  }
-  .service-icon {
-    font-size: 4rem;
-    margin-bottom: 1rem;
+}
+
+.service-icon {
+    font-size: 3.5rem; /* Adjusted font size */
+    margin-bottom: 0.8rem; /* Adjusted margin */
     color: var(--gold);
-  }
-  .service-title {
+}
+
+.service-title {
     font-weight: 700;
-    font-size: 1.6rem;
-    margin-bottom: 2rem;
+    font-size: 1.4rem; /* Adjusted font size */
+    margin-bottom: 1.5rem; /* Adjusted margin */
     color: var(--gold);
-  }
-  .services button {
+}
+
+.services button {
     background-color: var(--gold);
     border: none;
-    padding: 0.85rem 1.5rem;
+    padding: 0.75rem 1.2rem; /* Adjusted padding */
     font-weight: 500;
     color: var(--black);
-    font-size: 1.1rem;
+    font-size: 1rem; /* Adjusted font size */
     border-radius: 20px;
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(212, 175, 55, 0.6);
     transition: background-color 0.3s ease;
-  }
-  .service-desc {
-    font-size: 1rem;
-    color: #000000;
-  }
+}
 
-  .contact form {
-    max-width: 500px;
-    margin: 0 auto;
+.service-desc {
+    font-size: 0.95rem; /* Adjusted font size */
+    color: #f0f0f0; /* Changed to white/light gray for better contrast */
+    margin-top: 1rem; /* Added margin */
+}
+
+/* Contact Section */
+.contact form {
+    max-width: 450px; /* Adjusted max-width */
+    margin: 0 auto 2rem auto; /* Adjusted margin */
     background-color: var(--black);
     border: 2px solid var(--gold);
-    padding: 2rem;
+    padding: 1.5rem; /* Adjusted padding */
     border-radius: 12px;
     box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-  }
-  .contact label {
+}
+
+.contact label {
     display: block;
     margin-bottom: 0.3rem;
     font-weight: 600;
     color: var(--gold);
-  }
-  .contact input,
-  .contact textarea {
+}
+
+.contact input,
+.contact textarea {
     width: 100%;
-    padding: 0.75rem;
-    margin-bottom: 1.3rem;
+    padding: 0.65rem; /* Adjusted padding */
+    margin-bottom: 1rem; /* Adjusted margin */
     border: 1.5px solid var(--gold);
     border-radius: 8px;
     background-color: var(--black);
     color: var(--white);
-    font-size: 1rem;
+    font-size: 0.95rem; /* Adjusted font size */
     font-family: inherit;
     transition: border-color 0.3s ease;
-  }
-  .contact input:focus,
-  .contact textarea:focus {
+}
+
+.contact input:focus,
+.contact textarea:focus {
     border-color: #b28e22;
     outline: none;
-  }
-  .contact button {
+}
+
+.contact button {
     background-color: var(--gold);
     border: none;
-    padding: 0.85rem 2.5rem;
+    padding: 0.75rem 2rem; /* Adjusted padding */
     font-weight: 700;
     color: var(--black);
-    font-size: 1.1rem;
+    font-size: 1rem; /* Adjusted font size */
     border-radius: 60px;
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(212, 175, 55, 0.6);
     transition: background-color 0.3s ease;
-  }
-  .contact button:hover,
-  .contact button:focus {
+}
+
+.contact button:hover,
+.contact button:focus {
     background-color: #b28e22;
     outline: none;
-  }
+}
 
-  footer {
+.ceo-info {
+    display: flex;
+    flex-direction: column; /* Stack on mobile */
+    align-items: center;
+    gap: 1.5rem; /* Adjusted gap */
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.ceo-info p {
+    font-size: 1rem; /* Adjusted for mobile */
+    color: #f0f0f0;
+    line-height: 1.6;
+}
+
+.circle-image {
+    width: 120px; /* Slightly larger for better detail */
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid var(--gold); /* Added border for emphasis */
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.7); /* Added shadow */
+}
+
+/* Footer */
+footer {
     background-color: var(--black);
     color: #bbb;
     text-align: center;
-    padding: 1.5rem 1rem;
-    font-size: 0.95rem;
+    padding: 1rem; /* Adjusted padding */
+    font-size: 0.85rem; /* Adjusted font size for mobile */
     border-top: 1px solid var(--gold);
-  }
+}
 
-  /* Portfolio styles */
-  .portfolio {
+/* Portfolio styles (assuming they will be used for portfolio pages) */
+.portfolio {
     max-width: 1000px;
     margin: 0 auto;
-  }
-  .portfolio-category {
+}
+
+.portfolio-category {
     margin-bottom: 2rem;
-  }
-  .portfolio-category h4 {
-    font-size: 1.8rem;
+}
+
+.portfolio-category h4 {
+    font-size: 1.6rem; /* Adjusted for mobile */
     color: var(--gold);
     margin-bottom: 1rem;
     border-bottom: 2px solid var(--gold);
     display: inline-block;
     padding-bottom: 0.3rem;
     text-transform: uppercase;
-  }
+}
 
-  .portfolio-grid {
+.portfolio-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-  }
-  .portfolio-item {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjusted minmax for smaller screens */
+    gap: 15px; /* Adjusted gap */
+}
+
+.portfolio-item {
     position: relative;
     cursor: pointer;
     border: 2px solid var(--gold);
@@ -282,36 +344,34 @@
     box-shadow: 0 0 12px rgba(212, 175, 55, 0.3);
     background-color: var(--black);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .portfolio-item:hover,
-  .portfolio-item:focus {
+}
+
+.portfolio-item:hover,
+.portfolio-item:focus {
     box-shadow: 0 0 25px rgba(212, 175, 55, 0.7);
     transform: translateY(-5px);
     outline: none;
-  }
-  .portfolio-img,
-  .portfolio-video {
+}
+
+.portfolio-img,
+.portfolio-video {
     display: block;
     width: 100%;
-    height: 180px;
+    height: 160px; /* Adjusted height for smaller screens */
     object-fit: cover;
     border-radius: 8px 8px 0 0;
-  }
-  .portfolio-title {
-    padding: 0.75rem 1rem;
+}
+
+.portfolio-title {
+    padding: 0.6rem 0.8rem; /* Adjusted padding */
     color: var(--gold);
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1rem; /* Adjusted font size */
     text-align: center;
-  }
-  .circle-image {
-    width: 100px;       /* Reduce width */
-    height: 100px;      /* Reduce height */
-    object-fit: cover;  /* Ensure the image fills the shape */
-    border-radius: 50%; /* Makes it circular */
-  }
-  /* Lightbox */
-  #lightbox-overlay {
+}
+
+/* Lightbox */
+#lightbox-overlay {
     position: fixed;
     top:0; left:0; right:0; bottom:0;
     background: rgba(0,0,0,0.85);
@@ -322,51 +382,349 @@
     opacity: 0;
     transition: opacity 0.3s ease;
     z-index: 1000;
-  }
-  #lightbox-overlay.active {
+}
+
+#lightbox-overlay.active {
     visibility: visible;
     opacity: 1;
-  }
-  #lightbox-content {
-    max-width: 90vw;
-    max-height: 90vh;
+}
+
+#lightbox-content {
+    max-width: 95vw; /* Increased for mobile */
+    max-height: 95vh; /* Increased for mobile */
     position: relative;
-  }
-  #lightbox-content img,
-  #lightbox-content video {
+}
+
+#lightbox-content img,
+#lightbox-content video {
     max-width: 100%;
     max-height: 100%;
     border-radius: 12px;
     box-shadow: 0 0 30px rgba(212, 175, 55, 0.9);
     display: block;
-  }
-  #lightbox-close {
+}
+
+#lightbox-close {
     position: absolute;
-    top: -30px;
-    right: 0;
+    top: 5px; /* Adjusted position */
+    right: 5px; /* Adjusted position */
     font-size: 2rem;
     color: var(--gold);
     cursor: pointer;
     user-select: none;
     font-weight: 700;
-  }
-  #lightbox-close:hover {
-    color: #b28e22;
-  }
+    background: none; /* Removed background */
+    border: none; /* Removed border */
+    padding: 0.5rem; /* Added padding for easier touch */
+}
 
-  @media (max-width: 768px) {
-    .hero h2 {
-      font-size: 2.4rem;
+#lightbox-close:hover {
+    color: #b28e22;
+}
+
+/* --- Media Queries for PC / Larger Screens --- */
+@media (min-width: 769px) {
+    header {
+        padding: 1rem 4rem; /* More padding on larger screens */
     }
-    .hero p {
-      font-size: 1.1rem;
+
+    header .Logo {
+        height: 16vh;
+        max-height: 100px; /* Revert to larger logo on PC */
+        padding-right: 1rem;
     }
-    .services {
-      flex-direction: column;
-      align-items: center;
+
+    header span {
+        font-size: 1.4rem;
+        letter-spacing: 3px;
     }
+
     nav ul {
-      gap: 1rem;
-      font-size: 0.9rem;
+        gap: 2rem;
     }
-  }
+
+    nav ul li {
+        font-size: 1rem;
+    }
+
+    .hero h2 {
+        font-size: 3.4rem; /* Revert to larger font on PC */
+        letter-spacing: 4px;
+    }
+
+    .hero p {
+        font-size: 1.4rem; /* Revert to larger font on PC */
+    }
+
+    .hero button {
+        padding: 0.75rem 2.5rem;
+        font-size: 1.1rem;
+    }
+
+    main {
+        padding: 3rem 2rem;
+    }
+
+    section h3 {
+        font-size: 2.2rem;
+    }
+
+    .about p {
+        font-size: 1.1rem;
+    }
+
+    .services {
+        gap: 3rem;
+    }
+
+    .service-card {
+        padding: 2rem;
+        max-width: 350px;
+        flex: 1 1 300px;
+    }
+
+    .service-icon {
+        font-size: 4rem;
+    }
+
+    .service-title {
+        font-size: 1.6rem;
+    }
+
+    .services button {
+        padding: 0.85rem 1.5rem;
+        font-size: 1.1rem;
+    }
+
+    .service-desc {
+        font-size: 1rem;
+    }
+
+    .contact form {
+        max-width: 500px;
+        padding: 2rem;
+    }
+
+    .contact input,
+    .contact textarea {
+        padding: 0.75rem;
+        margin-bottom: 1.3rem;
+        font-size: 1rem;
+    }
+
+    .contact button {
+        padding: 0.85rem 2.5rem;
+        font-size: 1.1rem;
+    }
+
+    .ceo-info {
+        flex-direction: row; /* Layout side-by-side on PC */
+        text-align: left; /* Align text left on PC */
+        gap: 40px;
+    }
+
+    .ceo-info p {
+        font-size: 1.1rem;
+    }
+
+    .circle-image {
+        width: 100px; /* Revert to smaller size on PC */
+        height: 100px;
+    }
+
+    footer {
+        padding: 1.5rem 1rem;
+        font-size: 0.95rem;
+    }
+
+    .portfolio-category h4 {
+        font-size: 1.8rem;
+    }
+
+    .portfolio-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+    }
+
+    .portfolio-img,
+    .portfolio-video {
+        height: 180px;
+    }
+
+    .portfolio-title {
+        padding: 0.75rem 1rem;
+        font-size: 1.1rem;
+    }
+
+    #lightbox-close {
+        top: -30px;
+        right: 0;
+    }
+}
+
+/* --- Media Queries for Mobile / Smaller Screens (explicitly setting some values) --- */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+    }
+
+    header .Logo {
+        height: 10vh;
+        max-height: 70px;
+        padding-right: 0;
+        margin-bottom: 0.5rem;
+    }
+
+    header span {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        width: 100%;
+    }
+
+    nav ul li a {
+        padding: 0.5rem;
+        display: block;
+        text-align: center;
+    }
+
+    .hero {
+        height: 70vh;
+        padding: 0 0.5rem;
+    }
+
+    .hero h2 {
+        font-size: 1.8rem;
+        letter-spacing: 2px;
+        padding: 0.5rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+        padding: 0 0.5rem;
+    }
+
+    .hero button {
+        padding: 0.6rem 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    main {
+        padding: 1.5rem 0.8rem;
+    }
+
+    section h3 {
+        font-size: 1.5rem;
+        text-align: center;
+        width: 100%;
+    }
+
+    .about p {
+        font-size: 0.95rem;
+        padding: 0 0.5rem;
+    }
+
+    .services {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .service-card {
+        padding: 1rem;
+        max-width: 90%; /* Take up more width on small screens */
+        flex-basis: auto; /* Allow auto sizing */
+    }
+
+    .service-icon {
+        font-size: 3rem;
+    }
+
+    .service-title {
+        font-size: 1.3rem;
+    }
+
+    .services button {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .service-desc {
+        font-size: 0.9rem;
+    }
+
+    .contact form {
+        padding: 1rem;
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+    }
+
+    .contact input,
+    .contact textarea {
+        padding: 0.6rem;
+        margin-bottom: 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .contact button {
+        padding: 0.6rem 1.8rem;
+        font-size: 0.9rem;
+    }
+
+    .ceo-info {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+        padding: 0 0.5rem;
+    }
+
+    .ceo-info p {
+        font-size: 0.9rem;
+    }
+
+    .circle-image {
+        width: 100px;
+        height: 100px;
+    }
+
+    footer {
+        padding: 1rem 0.5rem;
+        font-size: 0.8rem;
+    }
+
+    .portfolio-category h4 {
+        font-size: 1.4rem;
+    }
+
+    .portfolio-grid {
+        grid-template-columns: 1fr; /* Single column on very small screens */
+        gap: 10px;
+    }
+
+    .portfolio-img,
+    .portfolio-video {
+        height: 140px;
+    }
+
+    .portfolio-title {
+        font-size: 0.9rem;
+    }
+
+    #lightbox-content {
+        max-width: 98vw;
+        max-height: 98vh;
+    }
+
+    #lightbox-close {
+        top: 0;
+        right: 0;
+        font-size: 1.8rem;
+    }
+}
