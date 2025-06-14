@@ -4,17 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>RHOG STUDIO - Graphic Design & Large Printing</title>
+    <!-- Link to your CSS file -->
     <link rel="stylesheet" href="./RHOG.css">
 </head>
 <body>
     <header>
+        <!-- Logo Image -->
         <img class="Logo" src="RHOG LOGO.png" alt="RHOG Studio Logo" loading="lazy">
+        <!-- Studio Name -->
         <span>RHOG STUDIO</span>
-        <button class="hamburger-menu" aria-label="Toggle navigation" aria-expanded="true">
+        <!-- Hamburger Menu Button for mobile navigation -->
+        <button class="hamburger-menu" aria-label="Toggle navigation" aria-expanded="false">
             <span class="bar"></span>
             <span class="bar"></span>
             <span class="bar"></span>
         </button>
+        <!-- Main Navigation -->
         <nav>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
@@ -23,83 +28,110 @@
             </ul>
         </nav>
     </header>
+
+    <!-- Hero Section: Introduction and Call to Action -->
     <section class="hero" aria-label="Introduction Section">
         <h2>Graphic Design & Large Printing Excellence</h2>
         <p>...with a speed of divine ideas</p>
         <button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get in Touch</button>
     </section>
+
     <main>
+        <!-- About Section -->
         <section id="about" class="about">
             <h3>About RHOG STUDIO</h3>
             <p>RHOG STUDIO is a premier Graphic Design and Large Printing Company dedicated to delivering high-quality, creative solutions to bring your brand to life. With cutting-edge technology and a passionate design team, we ensure every project stands out with elegance and impact.</p>
         </section>
+
+        <!-- Services Section -->
         <section id="services" class="services-section">
             <h3>Our Services</h3>
             <div class="services" role="list">
+                <!-- Graphic Design Service Card -->
                 <article class="service-card" role="listitem" tabindex="0">
                     <div class="service-icon" aria-hidden="true">🎨</div>
                     <h4 class="service-title">Graphic Design</h4>
-                    <a href="Portfolio images.html"> <button>DESIGNS</button></a>
+                    <!-- Description moved above the button -->
                     <p class="service-desc">Custom logos, branding, marketing materials, and creative visuals tailored to your business needs.</p>
+                    <a href="Portfolio images.html"> <button class="button-design">DESIGNS</button></a>
                 </article>
+                <!-- Large Format Printing Service Card -->
                 <article class="service-card" role="listitem" tabindex="0">
                     <div class="service-icon" aria-hidden="true">🖨</div>
                     <h4 class="service-title">Large Format Printing</h4>
-                    <a href="Portfolio Video.html"><button>VIDEOS</button> </a>
+                    <!-- Description moved above the button -->
                     <p class="service-desc">Banners, posters, vehicle wraps, and signs with vibrant colors and durable finishes for indoor and outdoor use.</p>
+                    <a href="Portfolio Video.html"><button class="button-printing">VIDEOS</button> </a>
                 </article>
             </div>
         </section>
+
+        <!-- Contact Section -->
         <section id="contact" class="contact">
             <h3>Contact Us</h3>
-            <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-            <form id="contact-form" action="https://formspree.io/f/mblyyjez" method="POST">
+            <form id="contact-form" action="https://formspree.io/f/mblyyjez" method="POST" field="My Email">
                 <label>
                     FULLNAME:
-                    <input type="name" name="name">
+                    <input type="name" name="name" required>
                 </label>
                 <label>
                     Email:
-                    <input type="email" name="email">
+                    <input type="email" name="email" required>
+                </label>
+                <!-- New Phone Number Field -->
+                <label>
+                    PHONE NUMBER (Country Code Included):
+                    <input type="tel" name="phone" placeholder="+234 801 234 5678" required>
                 </label>
                 <label>
                     Your message:
-                    <textarea name="message"></textarea>
+                    <textarea name="message" rows="5" required></textarea>
                 </label>
-                <button type="submit">Send</button>
+                <button type="submit" id="submit-button">Send</button>
             </form>
+
+            <!-- CEO Information -->
             <div class="ceo-info">
                 <img src="C.E.O.jpg" alt="Profile of Oyetunji Ebenezer, CEO of RHOG Studio" class="circle-image" loading="lazy">
-                <p>My name is Oyetunji Ebenezer, the CEO, and I’m glad you stopped by! We specialize in graphic design and printing, offering high-quality, creative solutions to bring your ideas to life. From eye-catching designs to professional prints, we’re here to make your brand stand out. Thank you for visiting our site, your support means everything, and I look forward to working with you!</p>
+                <p>My name is Oyetunji Ebenezer, the CEO, and I’m glad you stopped by! We specialize in graphic design and printing, offering high-quality, creative solutions to bring your ideas to life. From eye-catching designs to professional prints, we’re here to make your brand stand out. I am based in Nigeria. Thank you for visiting our site, your support means everything, and I look forward to working with you!</p>
                 <a href="https://wa.me/message/YCDV65D3NFNMK1" target="_blank"> <button>Chat on WhatsApp</button></a>
             </div>
         </section>
     </main>
+
+    <!-- Footer -->
     <footer>
         &copy; 2025 RHOG STUDIO. All rights reserved.
     </footer>
+
+    <!-- Lightbox Overlay for portfolio images/videos (currently not linked to portfolio items in this HTML) -->
     <div id="lightbox-overlay" role="dialog" aria-modal="true" aria-hidden="true">
         <div id="lightbox-content">
             <button id="lightbox-close" aria-label="Close">&times;</button>
         </div>
     </div>
-    <script>
-        // EmailJS initialization and form submission
-        (function() {
-            emailjs.init("lHLaPI0sQ2Zt_Fy0Y"); // Replace with your EmailJS public key
-        })();
 
+    
+
+    <!-- Simple Loading Spinner -->
+    <div id="loading-spinner" class="hidden">
+        <div class="spinner"></div>
+    </div>
+
+    <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Hamburger menu logic
+            // Hamburger menu functionality
             const hamburgerMenu = document.querySelector('.hamburger-menu');
             const navLinks = document.querySelector('.nav-links');
 
             hamburgerMenu.addEventListener('click', function () {
+                // Toggle the 'active' class to show/hide the navigation links
                 navLinks.classList.toggle('active');
+                // Update aria-expanded attribute for accessibility
                 hamburgerMenu.setAttribute('aria-expanded', navLinks.classList.contains('active'));
             });
 
-            // Close menu when a link is clicked (optional, but good for UX)
+            // Close the mobile menu when a navigation link is clicked
             document.querySelectorAll('.nav-links a').forEach(link => {
                 link.addEventListener('click', () => {
                     navLinks.classList.remove('active');
@@ -107,28 +139,101 @@
                 });
             });
 
-            // EmailJS form submission (original logic)
-            document.getElementById("contact-form").addEventListener("submit", function(e) {
-                e.preventDefault(); // Prevent default form submission
-                emailjs.sendForm("service_5rqt66q", "template_0ssg2db", this)
-                    .then(function(response) {
-                        alert("Email sent successfully!");
-                        document.getElementById("contact-form").reset();
-                    }, function(error) {
-                        alert("Failed to send email. Error: " + JSON.stringify(error));
+            // Get elements for the custom message box and loading spinner
+            const messageBoxOverlay = document.getElementById('message-box-overlay');
+            const messageBoxText = document.getElementById('message-box-text');
+            const messageBoxOkBtn = document.getElementById('message-box-ok');
+            const loadingSpinner = document.getElementById('loading-spinner');
+            const contactForm = document.getElementById('contact-form');
+            const submitButton = document.getElementById('submit-button');
+
+            /**
+             * Displays a custom message box.
+             * @param {string} message The text message to display.
+             * @param {boolean} isError If true, applies error styling to the message.
+             */
+            function showMessageBox(message, isError = false) {
+                messageBoxText.textContent = message;
+                if (isError) {
+                    messageBoxText.classList.add('error');
+                } else {
+                    messageBoxText.classList.remove('error');
+                }
+                messageBoxOverlay.classList.remove('hidden');
+                messageBoxOverlay.setAttribute('aria-hidden', 'false');
+                messageBoxOkBtn.focus(); // Focus on OK button for accessibility
+            }
+
+            /**
+             * Hides the custom message box.
+             */
+            function closeMessageBox() {
+                messageBoxOverlay.classList.add('hidden');
+                messageBoxOverlay.setAttribute('aria-hidden', 'true');
+            }
+
+            // Event listener for the OK button in the message box
+            messageBoxOkBtn.addEventListener('click', closeMessageBox);
+
+            // Close message box if clicking outside the content
+            messageBoxOverlay.addEventListener('click', (e) => {
+                if (e.target === messageBoxOverlay) {
+                    closeMessageBox();
+                }
+            });
+
+            // Formspree submission handling using Fetch API
+            contactForm.addEventListener("submit", async function(e) {
+                e.preventDefault(); // Prevent default browser form submission (page reload)
+
+                // Show loading spinner and disable submit button
+                loadingSpinner.classList.remove('hidden');
+                submitButton.disabled = true;
+
+                const formData = new FormData(this); // Get form data
+
+                try {
+                    const response = await fetch(this.action, {
+                        method: this.method,
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json' // Important for Formspree AJAX
+                        }
                     });
+
+                    if (response.ok) {
+                        showMessageBox("Message sent successfully!");
+                        contactForm.reset(); // Clear form fields on success
+                    } else {
+                        const data = await response.json();
+                        if (data.errors) {
+                            showMessageBox(data.errors.map(error => error.message).join(", "), true);
+                        } else {
+                            showMessageBox("Failed to send message. Please try again.", true);
+                        }
+                    }
+                } catch (error) {
+                    console.error('Form submission error:', error);
+                    showMessageBox("An unexpected error occurred. Please try again later.", true);
+                } finally {
+                    // Hide loading spinner and re-enable submit button
+                    loadingSpinner.classList.add('hidden');
+                    submitButton.disabled = false;
+                }
             });
         });
 
-        // Portfolio lightbox logic (original logic)
+        // Lightbox functionality for portfolio images/videos (original logic, independent of form)
         const lightboxOverlay = document.getElementById('lightbox-overlay');
         const lightboxContent = document.getElementById('lightbox-content');
         const closeBtn = document.getElementById('lightbox-close');
-        let lastFocusedElement = null;
+        let lastFocusedElement = null; // To store the last focused element for accessibility
 
         function openLightbox(type, src) {
-            lastFocusedElement = document.activeElement;
+            lastFocusedElement = document.activeElement; // Save the element that triggered the lightbox
+            // Clear any previous content in the lightbox
             lightboxContent.querySelectorAll('img, video').forEach(e => e.remove());
+
             if (type === 'image') {
                 const img = document.createElement('img');
                 img.src = src;
@@ -139,40 +244,46 @@
                 video.src = src;
                 video.controls = true;
                 video.autoplay = true;
-                video.style.maxHeight = '90vh';
+                video.style.maxHeight = '90vh'; // Ensure video fits within viewport
                 lightboxContent.appendChild(video);
             }
+            // Activate the lightbox overlay
             lightboxOverlay.classList.add('active');
             lightboxOverlay.setAttribute('aria-hidden', 'false');
-            closeBtn.focus();
+            closeBtn.focus(); // Focus on OK button for accessibility
         }
 
         function closeLightbox() {
+            // Deactivate the lightbox overlay
             lightboxOverlay.classList.remove('active');
             lightboxOverlay.setAttribute('aria-hidden', 'true');
+            // Return focus to the element that opened the lightbox
             if(lastFocusedElement) lastFocusedElement.focus();
         }
 
+        // Event listeners for closing the lightbox
         closeBtn.addEventListener('click', closeLightbox);
         lightboxOverlay.addEventListener('click', (e) => {
+            // Close if clicking outside the content but within the overlay
             if(e.target === lightboxOverlay) {
                 closeLightbox();
             }
         });
+        // Close lightbox with Escape key
         document.addEventListener('keydown', (e) => {
             if(e.key === "Escape" && lightboxOverlay.classList.contains('active')){
                 closeLightbox();
             }
         });
 
-        // Attach event listeners to portfolio items (assuming they exist elsewhere or will be added)
+        // Attach event listeners to portfolio items (these elements are expected to be on separate portfolio pages)
         document.querySelectorAll('.portfolio-item').forEach(item => {
             item.addEventListener('click', () => {
                 openLightbox(item.dataset.type, item.dataset.src);
             });
             item.addEventListener('keydown', (e) => {
                 if(e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
+                    e.preventDefault(); // Prevent default space/enter behavior
                     openLightbox(item.dataset.type, item.dataset.src);
                 }
             });
