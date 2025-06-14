@@ -4,12 +4,10 @@
     --black: #000000;
     --white: #ffffff;
 }
-
 /* Reset and base styles */
 * {
     box-sizing: border-box;
 }
-
 body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -17,68 +15,85 @@ body {
     color: var(--white);
     line-height: 1.6;
 }
-
 a {
     color: var(--gold);
     text-decoration: none;
 }
-
 a:hover,
 a:focus {
     text-decoration: underline;
 }
-
 /* Header */
 header {
     background-color: var(--black);
     border-bottom: 3px solid var(--gold);
     padding: 1rem 2rem;
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-start; /* Default for larger screens */
     align-items: center;
     position: sticky;
     top: 0;
     z-index: 100;
 }
-
 header .Logo {
-    height: 12vh; /* Adjusted for smaller screens by default */
-    max-height: 80px; /* Max height for logo */
+    height: 12vh;
+    max-height: 80px;
     width: auto;
     text-align: center;
     padding-right: 1rem;
 }
-
 header span {
     font-weight: 800;
-    font-size: 1.2rem; /* Adjusted for smaller screens */
+    font-size: 1.2rem;
     letter-spacing: 2px;
     color: var(--gold);
-    white-space: nowrap; /* Prevent text wrapping */
+    white-space: nowrap;
 }
 
+/* Hamburger Menu Button */
+.hamburger-menu {
+    display: none; /* Hidden by default on larger screens */
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 101;
+    margin-left: auto; /* Push to the right on larger screens if visible */
+}
+
+.hamburger-menu .bar {
+    width: 100%;
+    height: 3px;
+    background-color: var(--gold);
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+/* Navigation for Desktop (default state) */
 nav {
     margin-left: auto; /* Push nav to the right */
 }
 
-nav ul {
+nav ul.nav-links {
     list-style: none;
     display: flex;
     justify-content: flex-end;
-    gap: 1.5rem; /* Adjusted gap for mobile */
+    gap: 1.5rem;
     margin: 0;
     padding: 0;
 }
-
 nav ul li {
     font-weight: 600;
-    font-size: 0.9rem; /* Adjusted for mobile */
+    font-size: 0.9rem;
 }
-
 /* Hero Section */
 .hero {
     background: linear-gradient(rgba(0,0,0,0.7), rgba(0, 0, 0, 0.7)), url('lannding page.jpeg') center/cover no-repeat;
-    background-size: cover; /* Ensure it covers the area */
+    background-size: cover;
     background-position: center;
     height: 80vh;
     color: var(--gold);
@@ -89,32 +104,29 @@ nav ul li {
     text-align: center;
     padding: 0 1rem;
 }
-
 .hero h2 {
     box-shadow: 5px 5px 10px rgb(0, 0, 0);
-    font-size: 2.5rem; /* Adjusted for smaller screens */
+    font-size: 2.5rem;
     margin-bottom: 0.5rem;
     font-weight: 900;
     text-transform: uppercase;
-    letter-spacing: 3px; /* Adjusted for smaller screens */
-    padding: 0.5rem 1rem; /* Added padding for better visual */
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for text */
+    letter-spacing: 3px;
+    padding: 0.5rem 1rem;
+    background-color: rgba(0, 0, 0, 0.5);
     border-radius: 8px;
 }
-
 .hero p {
-    font-size: 1.2rem; /* Adjusted for smaller screens */
+    font-size: 1.2rem;
     max-width: 650px;
     font-weight: 500;
-    padding: 0 1rem; /* Added padding */
+    padding: 0 1rem;
 }
-
 .hero button {
-    margin-top: 1.5rem; /* Adjusted margin */
+    margin-top: 1.5rem;
     background-color: var(--gold);
     border: none;
-    padding: 0.75rem 2rem; /* Adjusted padding */
-    font-size: 1rem; /* Adjusted font size */
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--black);
     border-radius: 60px;
@@ -122,26 +134,22 @@ nav ul li {
     box-shadow: 0 4px 10px rgba(212, 175, 55, 0.6);
     transition: background-color 0.3s ease;
 }
-
 .hero button:hover,
 .hero button:focus {
     background-color: #b28e22;
     outline: none;
 }
-
 /* Main Content */
 main {
-    padding: 2rem 1rem; /* Adjusted padding for smaller screens */
+    padding: 2rem 1rem;
     max-width: 1200px;
     margin: 0 auto;
 }
-
 section {
-    margin-bottom: 3rem; /* Adjusted margin */
+    margin-bottom: 3rem;
 }
-
 section h3 {
-    font-size: 1.8rem; /* Adjusted for smaller screens */
+    font-size: 1.8rem;
     font-weight: 800;
     color: var(--gold);
     margin-bottom: 1rem;
@@ -151,176 +159,155 @@ section h3 {
     display: inline-block;
     padding-bottom: 0.3rem;
 }
-
 .about p {
-    font-size: 1rem; /* Adjusted for smaller screens */
+    font-size: 1rem;
     max-width: 800px;
     margin: 0 auto;
     color: #f0f0f0;
     line-height: 1.7;
 }
-
 /* Services Section */
 .services {
     display: flex;
-    gap: 2rem; /* Adjusted gap */
+    gap: 2rem;
     flex-wrap: wrap;
     justify-content: center;
 }
-
 .service-card {
     background-color: var(--black);
     border: 2px solid var(--gold);
-    padding: 1.5rem; /* Adjusted padding */
-    max-width: 300px; /* Adjusted max-width */
-    flex: 1 1 280px; /* Allow more flexibility for smaller screens */
+    padding: 1.5rem;
+    max-width: 300px;
+    flex: 1 1 280px;
     text-align: center;
     box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
     border-radius: 10px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 .service-card:hover,
 .service-card:focus-within {
     box-shadow: 0 0 25px rgba(212, 175, 55, 0.7);
     transform: translateY(-6px);
 }
-
 .service-icon {
-    font-size: 3.5rem; /* Adjusted font size */
-    margin-bottom: 0.8rem; /* Adjusted margin */
+    font-size: 3.5rem;
+    margin-bottom: 0.8rem;
     color: var(--gold);
 }
-
 .service-title {
     font-weight: 700;
-    font-size: 1.4rem; /* Adjusted font size */
-    margin-bottom: 1.5rem; /* Adjusted margin */
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
     color: var(--gold);
 }
-
 .services button {
     background-color: var(--gold);
     border: none;
-    padding: 0.75rem 1.2rem; /* Adjusted padding */
+    padding: 0.75rem 1.2rem;
     font-weight: 500;
     color: var(--black);
-    font-size: 1rem; /* Adjusted font size */
+    font-size: 1rem;
     border-radius: 20px;
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(212, 175, 55, 0.6);
     transition: background-color 0.3s ease;
 }
-
 .service-desc {
-    font-size: 0.95rem; /* Adjusted font size */
-    color: #f0f0f0; /* Changed to white/light gray for better contrast */
-    margin-top: 1rem; /* Added margin */
+    font-size: 0.95rem;
+    color: #f0f0f0;
+    margin-top: 1rem;
 }
-
 /* Contact Section */
 .contact form {
-    max-width: 450px; /* Adjusted max-width */
-    margin: 0 auto 2rem auto; /* Adjusted margin */
+    max-width: 450px;
+    margin: 0 auto 2rem auto;
     background-color: var(--black);
     border: 2px solid var(--gold);
-    padding: 1.5rem; /* Adjusted padding */
+    padding: 1.5rem;
     border-radius: 12px;
     box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
 }
-
 .contact label {
     display: block;
     margin-bottom: 0.3rem;
     font-weight: 600;
     color: var(--gold);
 }
-
 .contact input,
 .contact textarea {
     width: 100%;
-    padding: 0.65rem; /* Adjusted padding */
-    margin-bottom: 1rem; /* Adjusted margin */
+    padding: 0.65rem;
+    margin-bottom: 1rem;
     border: 1.5px solid var(--gold);
     border-radius: 8px;
     background-color: var(--black);
     color: var(--white);
-    font-size: 0.95rem; /* Adjusted font size */
+    font-size: 0.95rem;
     font-family: inherit;
     transition: border-color 0.3s ease;
 }
-
 .contact input:focus,
 .contact textarea:focus {
     border-color: #b28e22;
     outline: none;
 }
-
 .contact button {
     background-color: var(--gold);
     border: none;
-    padding: 0.75rem 2rem; /* Adjusted padding */
+    padding: 0.75rem 2rem;
     font-weight: 700;
     color: var(--black);
-    font-size: 1rem; /* Adjusted font size */
+    font-size: 1rem;
     border-radius: 60px;
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(212, 175, 55, 0.6);
     transition: background-color 0.3s ease;
 }
-
 .contact button:hover,
 .contact button:focus {
     background-color: #b28e22;
     outline: none;
 }
-
 .ceo-info {
     display: flex;
-    flex-direction: column; /* Stack on mobile */
+    flex-direction: column;
     align-items: center;
-    gap: 1.5rem; /* Adjusted gap */
+    gap: 1.5rem;
     margin-top: 2rem;
     text-align: center;
 }
-
 .ceo-info p {
-    font-size: 1rem; /* Adjusted for mobile */
+    font-size: 1rem;
     color: #f0f0f0;
     line-height: 1.6;
 }
-
 .circle-image {
-    width: 120px; /* Slightly larger for better detail */
+    width: 120px;
     height: 120px;
     object-fit: cover;
     border-radius: 50%;
-    border: 3px solid var(--gold); /* Added border for emphasis */
-    box-shadow: 0 0 15px rgba(212, 175, 55, 0.7); /* Added shadow */
+    border: 3px solid var(--gold);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.7);
 }
-
 /* Footer */
 footer {
     background-color: var(--black);
     color: #bbb;
     text-align: center;
-    padding: 1rem; /* Adjusted padding */
-    font-size: 0.85rem; /* Adjusted font size for mobile */
+    padding: 1rem;
+    font-size: 0.85rem;
     border-top: 1px solid var(--gold);
 }
-
 /* Portfolio styles (assuming they will be used for portfolio pages) */
 .portfolio {
     max-width: 1000px;
     margin: 0 auto;
 }
-
 .portfolio-category {
     margin-bottom: 2rem;
 }
-
 .portfolio-category h4 {
-    font-size: 1.6rem; /* Adjusted for mobile */
+    font-size: 1.6rem;
     color: var(--gold);
     margin-bottom: 1rem;
     border-bottom: 2px solid var(--gold);
@@ -328,13 +315,11 @@ footer {
     padding-bottom: 0.3rem;
     text-transform: uppercase;
 }
-
 .portfolio-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjusted minmax for smaller screens */
-    gap: 15px; /* Adjusted gap */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
 }
-
 .portfolio-item {
     position: relative;
     cursor: pointer;
@@ -345,31 +330,27 @@ footer {
     background-color: var(--black);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 .portfolio-item:hover,
 .portfolio-item:focus {
     box-shadow: 0 0 25px rgba(212, 175, 55, 0.7);
     transform: translateY(-5px);
     outline: none;
 }
-
 .portfolio-img,
 .portfolio-video {
     display: block;
     width: 100%;
-    height: 160px; /* Adjusted height for smaller screens */
+    height: 160px;
     object-fit: cover;
     border-radius: 8px 8px 0 0;
 }
-
 .portfolio-title {
-    padding: 0.6rem 0.8rem; /* Adjusted padding */
+    padding: 0.6rem 0.8rem;
     color: var(--gold);
     font-weight: 700;
-    font-size: 1rem; /* Adjusted font size */
+    font-size: 1rem;
     text-align: center;
 }
-
 /* Lightbox */
 #lightbox-overlay {
     position: fixed;
@@ -383,18 +364,15 @@ footer {
     transition: opacity 0.3s ease;
     z-index: 1000;
 }
-
 #lightbox-overlay.active {
     visibility: visible;
     opacity: 1;
 }
-
 #lightbox-content {
-    max-width: 95vw; /* Increased for mobile */
-    max-height: 95vh; /* Increased for mobile */
+    max-width: 95vw;
+    max-height: 95vh;
     position: relative;
 }
-
 #lightbox-content img,
 #lightbox-content video {
     max-width: 100%;
@@ -403,325 +381,310 @@ footer {
     box-shadow: 0 0 30px rgba(212, 175, 55, 0.9);
     display: block;
 }
-
 #lightbox-close {
     position: absolute;
-    top: 5px; /* Adjusted position */
-    right: 5px; /* Adjusted position */
+    top: 5px;
+    right: 5px;
     font-size: 2rem;
     color: var(--gold);
     cursor: pointer;
     user-select: none;
     font-weight: 700;
-    background: none; /* Removed background */
-    border: none; /* Removed border */
-    padding: 0.5rem; /* Added padding for easier touch */
+    background: none;
+    border: none;
+    padding: 0.5rem;
 }
-
 #lightbox-close:hover {
     color: #b28e22;
 }
-
 /* --- Media Queries for PC / Larger Screens --- */
 @media (min-width: 769px) {
     header {
-        padding: 1rem 4rem; /* More padding on larger screens */
+        padding: 1rem 4rem;
+        justify-content: flex-start; /* Revert for PC */
     }
-
     header .Logo {
         height: 16vh;
-        max-height: 100px; /* Revert to larger logo on PC */
+        max-height: 100px;
         padding-right: 1rem;
     }
-
     header span {
         font-size: 1.4rem;
         letter-spacing: 3px;
+        margin-left: 0; /* Remove specific mobile margin */
+        margin-right: 0; /* Remove specific mobile margin */
     }
-
-    nav ul {
+    .hamburger-menu {
+        display: none; /* Hide hamburger on PC */
+    }
+    nav {
+        margin-left: auto; /* Push nav to the right */
+        position: static; /* Revert positioning for PC */
+        max-height: none; /* Remove max-height for PC */
+        border-top: none; /* Remove border-top for PC */
+        overflow: visible; /* Revert overflow for PC */
+    }
+    nav ul.nav-links {
         gap: 2rem;
+        flex-direction: row; /* Revert to row for PC */
+        align-items: center; /* Revert alignment for PC */
+        padding: 0; /* Remove padding for PC */
     }
-
     nav ul li {
         font-size: 1rem;
     }
-
+    nav ul li a {
+        padding: 0; /* Remove padding for PC */
+        border-bottom: none; /* Remove border for PC */
+    }
     .hero h2 {
-        font-size: 3.4rem; /* Revert to larger font on PC */
+        font-size: 3.4rem;
         letter-spacing: 4px;
     }
-
     .hero p {
-        font-size: 1.4rem; /* Revert to larger font on PC */
+        font-size: 1.4rem;
     }
-
     .hero button {
         padding: 0.75rem 2.5rem;
         font-size: 1.1rem;
     }
-
     main {
         padding: 3rem 2rem;
     }
-
     section h3 {
         font-size: 2.2rem;
+        text-align: left; /* Revert alignment for PC */
     }
-
     .about p {
         font-size: 1.1rem;
     }
-
     .services {
         gap: 3rem;
     }
-
     .service-card {
         padding: 2rem;
         max-width: 350px;
         flex: 1 1 300px;
     }
-
     .service-icon {
         font-size: 4rem;
     }
-
     .service-title {
         font-size: 1.6rem;
     }
-
     .services button {
         padding: 0.85rem 1.5rem;
         font-size: 1.1rem;
     }
-
     .service-desc {
         font-size: 1rem;
     }
-
     .contact form {
         max-width: 500px;
         padding: 2rem;
     }
-
     .contact input,
     .contact textarea {
         padding: 0.75rem;
         margin-bottom: 1.3rem;
         font-size: 1rem;
     }
-
     .contact button {
         padding: 0.85rem 2.5rem;
         font-size: 1.1rem;
     }
-
     .ceo-info {
-        flex-direction: row; /* Layout side-by-side on PC */
-        text-align: left; /* Align text left on PC */
+        flex-direction: row;
+        text-align: left;
         gap: 40px;
     }
-
     .ceo-info p {
         font-size: 1.1rem;
     }
-
     .circle-image {
-        width: 100px; /* Revert to smaller size on PC */
+        width: 100px;
         height: 100px;
     }
-
     footer {
         padding: 1.5rem 1rem;
         font-size: 0.95rem;
     }
-
     .portfolio-category h4 {
         font-size: 1.8rem;
     }
-
     .portfolio-grid {
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: 20px;
     }
-
     .portfolio-img,
     .portfolio-video {
         height: 180px;
     }
-
     .portfolio-title {
         padding: 0.75rem 1rem;
         font-size: 1.1rem;
     }
-
     #lightbox-close {
         top: -30px;
         right: 0;
     }
 }
-
 /* --- Media Queries for Mobile / Smaller Screens (explicitly setting some values) --- */
 @media (max-width: 768px) {
     header {
-        flex-direction: column;
+        flex-direction: row; /* Keep logo and hamburger on one row */
+        justify-content: space-between; /* Space between logo and hamburger */
         align-items: center;
         padding: 1rem;
     }
-
     header .Logo {
         height: 10vh;
         max-height: 70px;
         padding-right: 0;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0; /* Remove bottom margin */
     }
-
     header span {
         font-size: 1.1rem;
-        margin-bottom: 1rem;
+        margin-bottom: 0; /* Remove bottom margin */
+        margin-left: auto; /* Push studio name to the left of the hamburger */
+        margin-right: 1rem; /* Space between studio name and hamburger */
     }
-
-    nav ul {
+    .hamburger-menu {
+        display: flex; /* Show hamburger on mobile */
+    }
+    nav {
+        position: absolute;
+        top: 100%; /* Position below the header */
+        left: 0;
+        width: 100%;
+        background-color: var(--black); /* Same as header background */
+        border-top: 1px solid var(--gold);
+        overflow: hidden;
+        max-height: 0; /* Hidden by default */
+        transition: max-height 0.3s ease-in-out;
+        z-index: 99; /* Below header, above main content */
+    }
+    nav ul.nav-links {
         flex-direction: column;
         align-items: center;
+        padding: 1rem 0; /* Add some padding when open */
         gap: 0.5rem;
-        width: 100%;
     }
-
+    nav ul.nav-links.active {
+        max-height: 200px; /* Adjust as needed to fit all links */
+    }
     nav ul li a {
         padding: 0.5rem;
         display: block;
+        width: 100%;
         text-align: center;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.2); /* Subtle separator */
     }
-
+    nav ul li:last-child a {
+        border-bottom: none; /* No border for the last item */
+    }
     .hero {
         height: 70vh;
         padding: 0 0.5rem;
     }
-
     .hero h2 {
         font-size: 1.8rem;
         letter-spacing: 2px;
         padding: 0.5rem;
     }
-
     .hero p {
         font-size: 1rem;
         padding: 0 0.5rem;
     }
-
     .hero button {
         padding: 0.6rem 1.5rem;
         font-size: 0.9rem;
     }
-
     main {
         padding: 1.5rem 0.8rem;
     }
-
     section h3 {
         font-size: 1.5rem;
         text-align: center;
         width: 100%;
     }
-
     .about p {
         font-size: 0.95rem;
         padding: 0 0.5rem;
     }
-
     .services {
         flex-direction: column;
         align-items: center;
         gap: 1.5rem;
     }
-
     .service-card {
         padding: 1rem;
-        max-width: 90%; /* Take up more width on small screens */
-        flex-basis: auto; /* Allow auto sizing */
+        max-width: 90%;
+        flex-basis: auto;
     }
-
     .service-icon {
         font-size: 3rem;
     }
-
     .service-title {
         font-size: 1.3rem;
     }
-
     .services button {
         padding: 0.6rem 1rem;
         font-size: 0.9rem;
     }
-
     .service-desc {
         font-size: 0.9rem;
     }
-
     .contact form {
         padding: 1rem;
         margin-left: 0.5rem;
         margin-right: 0.5rem;
     }
-
     .contact input,
     .contact textarea {
         padding: 0.6rem;
         margin-bottom: 0.8rem;
         font-size: 0.9rem;
     }
-
     .contact button {
         padding: 0.6rem 1.8rem;
         font-size: 0.9rem;
     }
-
     .ceo-info {
         flex-direction: column;
         text-align: center;
         gap: 1rem;
         padding: 0 0.5rem;
     }
-
     .ceo-info p {
         font-size: 0.9rem;
     }
-
     .circle-image {
         width: 100px;
         height: 100px;
     }
-
     footer {
         padding: 1rem 0.5rem;
         font-size: 0.8rem;
     }
-
     .portfolio-category h4 {
         font-size: 1.4rem;
     }
-
     .portfolio-grid {
-        grid-template-columns: 1fr; /* Single column on very small screens */
+        grid-template-columns: 1fr;
         gap: 10px;
     }
-
     .portfolio-img,
     .portfolio-video {
         height: 140px;
     }
-
     .portfolio-title {
         font-size: 0.9rem;
     }
-
     #lightbox-content {
         max-width: 98vw;
         max-height: 98vh;
     }
-
     #lightbox-close {
         top: 0;
         right: 0;

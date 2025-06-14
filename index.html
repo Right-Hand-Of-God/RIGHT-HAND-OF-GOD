@@ -10,27 +10,29 @@
     <header>
         <img class="Logo" src="RHOG LOGO.png" alt="RHOG Studio Logo" loading="lazy">
         <span>RHOG STUDIO</span>
+        <button class="hamburger-menu" aria-label="Toggle navigation" aria-expanded="false">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
         <nav>
-            <ul>
+            <ul class="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
-
     <section class="hero" aria-label="Introduction Section">
         <h2>Graphic Design & Large Printing Excellence</h2>
         <p>...with a speed of divine ideas</p>
         <button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get in Touch</button>
     </section>
-
     <main>
         <section id="about" class="about">
             <h3>About RHOG STUDIO</h3>
             <p>RHOG STUDIO is a premier Graphic Design and Large Printing Company dedicated to delivering high-quality, creative solutions to bring your brand to life. With cutting-edge technology and a passionate design team, we ensure every project stands out with elegance and impact.</p>
         </section>
-
         <section id="services" class="services-section">
             <h3>Our Services</h3>
             <div class="services" role="list">
@@ -48,76 +50,85 @@
                 </article>
             </div>
         </section>
-
         <section id="contact" class="contact">
             <h3>Contact Us</h3>
             <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-            <form
-                  action="https://formspree.io/f/mblyyjez"
-                  method="POST"
-                >
-                  <label>
+            <form id="contact-form" action="https://formspree.io/f/mblyyjez" method="POST">
+                <label>
                     FULLNAME:
                     <input type="name" name="name">
-                  </label>
-                  <label>
+                </label>
+                <label>
                     Email:
                     <input type="email" name="email">
-                  </label>
-                  <label>
+                </label>
+                <label>
                     Your message:
                     <textarea name="message"></textarea>
-                  </label>
-                  <!-- your other form fields go here -->
-                  <button type="submit">Send</button>
-              </form>
+                </label>
+                <button type="submit">Send</button>
+            </form>
             <div class="ceo-info">
                 <img src="C.E.O.jpg" alt="Profile of Oyetunji Ebenezer, CEO of RHOG Studio" class="circle-image" loading="lazy">
                 <p>My name is Oyetunji Ebenezer, the CEO, and I’m glad you stopped by! We specialize in graphic design and printing, offering high-quality, creative solutions to bring your ideas to life. From eye-catching designs to professional prints, we’re here to make your brand stand out. Thank you for visiting our site, your support means everything, and I look forward to working with you!</p>
-             <a href="https://wa.me/message/YCDV65D3NFNMK1" target="_blank"> <button>Chat on WhatsApp</button></a>
+                <a href="https://wa.me/message/YCDV65D3NFNMK1" target="_blank"> <button>Chat on WhatsApp</button></a>
             </div>
         </section>
     </main>
-
     <footer>
         &copy; 2025 RHOG STUDIO. All rights reserved.
     </footer>
-
     <div id="lightbox-overlay" role="dialog" aria-modal="true" aria-hidden="true">
         <div id="lightbox-content">
             <button id="lightbox-close" aria-label="Close">&times;</button>
-            </div>
+        </div>
     </div>
-
     <script>
         // EmailJS initialization and form submission
         (function() {
             emailjs.init("lHLaPI0sQ2Zt_Fy0Y"); // Replace with your EmailJS public key
         })();
 
-        document.getElementById("contact-form").addEventListener("submit", function(e) {
-            e.preventDefault(); // Prevent default form submission
+        document.addEventListener('DOMContentLoaded', function () {
+            // Hamburger menu logic
+            const hamburgerMenu = document.querySelector('.hamburger-menu');
+            const navLinks = document.querySelector('.nav-links');
 
-            emailjs.sendForm("service_5rqt66q", "template_0ssg2db", this)
-                .then(function(response) {
-                    alert("Email sent successfully!");
-                    document.getElementById("contact-form").reset(); // Clear form on success
-                }, function(error) {
-                    alert("Failed to send email. Error: " + JSON.stringify(error));
+            hamburgerMenu.addEventListener('click', function () {
+                navLinks.classList.toggle('active');
+                hamburgerMenu.setAttribute('aria-expanded', navLinks.classList.contains('active'));
+            });
+
+            // Close menu when a link is clicked (optional, but good for UX)
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    hamburgerMenu.setAttribute('aria-expanded', 'false');
                 });
+            });
+
+            // EmailJS form submission (original logic)
+            document.getElementById("contact-form").addEventListener("submit", function(e) {
+                e.preventDefault(); // Prevent default form submission
+                emailjs.sendForm("service_5rqt66q", "template_0ssg2db", this)
+                    .then(function(response) {
+                        alert("Email sent successfully!");
+                        document.getElementById("contact-form").reset();
+                    }, function(error) {
+                        alert("Failed to send email. Error: " + JSON.stringify(error));
+                    });
+            });
         });
 
-        // Portfolio lightbox logic
+        // Portfolio lightbox logic (original logic)
         const lightboxOverlay = document.getElementById('lightbox-overlay');
         const lightboxContent = document.getElementById('lightbox-content');
         const closeBtn = document.getElementById('lightbox-close');
-
         let lastFocusedElement = null;
 
         function openLightbox(type, src) {
             lastFocusedElement = document.activeElement;
             lightboxContent.querySelectorAll('img, video').forEach(e => e.remove());
-
             if (type === 'image') {
                 const img = document.createElement('img');
                 img.src = src;
@@ -148,7 +159,6 @@
                 closeLightbox();
             }
         });
-
         document.addEventListener('keydown', (e) => {
             if(e.key === "Escape" && lightboxOverlay.classList.contains('active')){
                 closeLightbox();
@@ -156,8 +166,6 @@
         });
 
         // Attach event listeners to portfolio items (assuming they exist elsewhere or will be added)
-        // If you have .portfolio-item elements, ensure they have data-type and data-src attributes.
-        // For example: <div class="portfolio-item" data-type="image" data-src="path/to/image.jpg" tabindex="0">...</div>
         document.querySelectorAll('.portfolio-item').forEach(item => {
             item.addEventListener('click', () => {
                 openLightbox(item.dataset.type, item.dataset.src);
