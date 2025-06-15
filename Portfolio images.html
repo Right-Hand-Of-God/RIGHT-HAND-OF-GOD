@@ -1,120 +1,163 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RHOG STUDIO - Graphic Design & Large Printing</title>
-    <link rel="icon" href="RHOG LOGO.png" type="image/png">
-        <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Optional: Custom font for a clean look */
-        body {
-            font-family: 'Inter', sans-serif;
-        }
+ <html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RHOG STUDIO - Graphic Design & Large Printing</title>
+  <link rel="icon" href="RHOG LOGO.png" type="image/png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+  /* Optional: Custom font for a clean look */
+  body {
+  font-family: 'Inter', sans-serif;
+  }
+ 
 
-        /* Styles for the modal backdrop */
-        .modal-backdrop {
-            background-color: rgba(0, 0, 0, 0.85); /* Darker, slightly transparent background */
-            z-index: 1000; /* Ensure it's on top */
-        }
+  /* Styles for the modal backdrop */
+  .modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.85); /* Darker, slightly transparent background */
+  z-index: 1000; /* Ensure it's on top */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none; /* Hidden by default */
+  justify-content: center;
+  align-items: center;
+  }
+ 
 
-        /* Styles for the modal content container */
-        .modal-content {
-            max-width: 90vw;
-            max-height: 90vh;
-            width: auto;
-            height: auto;
-            overflow: hidden; /* Hide overflow from media */
-            background-color: #1a1a1a; /* Dark background for modal */
-            border-radius: 1rem; /* Rounded corners */
-            position: relative; /* For positioning the close button */
-        }
+  /* Styles for the modal content container */
+  .modal-content {
+  max-width: 90vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  overflow: hidden; /* Hide overflow from media */
+  background-color: #1a1a1a; /* Dark background for modal */
+  border-radius: 1rem; /* Rounded corners */
+  position: relative; /* For positioning the close button */
+  }
+ 
 
-        /* Styles for media inside the modal */
-        .modal-content img,
-        .modal-content video {
-            display: block;
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain; /* Ensure entire image/video is visible */
-            border-radius: 0.75rem; /* Match modal corners partially */
-        }
-    </style>
-</head>
-<body class="bg-black text-white">
-    <!-- Header Section -->
-    <header class="bg-gray-900 shadow-md p-4 rounded-b-lg mb-8">
-        <div class="container mx-auto flex justify-between items-center px-4">
-            <h1 class="text-3xl font-bold text-amber-400">RHOG STUDIO</h1>
-        </div>
-    </header>
+  /* Styles for media inside the modal */
+  .modal-content img,
+  .modal-content video {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* Ensure entire image/video is visible */
+  border-radius: 0.75rem; /* Match modal corners partially */
+  }
+ 
 
-<!-- Portfolio Section -->
-    <section class="py-8 px-4">
-        <div class="container mx-auto">
-            <!-- Pictures Category -->
-            <div class="portfolio-category mb-12" id="pictures">
-                <h2 class="text-4xl font-extrabold text-center text-amber-400 mb-8">Our Creative Portfolio</h2>
-                <h4 class="text-2xl font-semibold text-center text-white mb-6">Pictures</h4>
-                <div class="portfolio-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    <!-- Portfolio Item 1 -->
-                    <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer"
-                        tabindex="0" role="button" aria-pressed="false" data-type="image" data-src="RHOG BRAND ,,.jpg"
-                        aria-label="View picture Project 1: RHOG BRAND ,,.jpg">
-                        <img src="RHOG BRAND ,,.jpg" alt="BRAND" class="portfolio-img w-full h-48 object-cover rounded-t-xl" />
-                        <div class="portfolio-title p-4 text-center text-lg font-medium text-white">BRAND</div>
-                    </div>
-                    <!-- Portfolio Item 2 -->
-                    <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer"
-                        tabindex="0" role="button" aria-pressed="false" data-type="image" data-src="img (1).jpg"
-                        aria-label="View picture Project 2: Urban Poster">
-                        <img src="img (1).jpg" alt="SAHPS WEEK" class="portfolio-img w-full h-48 object-cover rounded-t-xl" />
-                        <div class="portfolio-title p-4 text-center text-lg font-medium text-white">SAHPS WEEK</div>
-                    </div>
-                    <!-- Portfolio Item 3 -->
-                    <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer"
-                        tabindex="0" role="button" aria-pressed="false" data-type="image" data-src="img (2).jpg"
-                        aria-label="View picture Project 3: Colorful Shapes">
-                        <img src="img (2).jpg" alt="BIRTHDAY DESIGN" class="portfolio-img w-full h-48 object-cover rounded-t-xl" />
-                        <div class="portfolio-title p-4 text-center text-lg font-medium text-white">BIRTHDAY</div>
-                    </div>
-                    <!-- Portfolio Item 4 -->
-                    <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer"
-                        tabindex="0" role="button" aria-pressed="false" data-type="image" data-src="img (6).jpg"
-                        aria-label="View picture Project 4: Modern Typography">
-                        <img src="img (6).jpg" alt="BANNER DESIGN" class="portfolio-img w-full h-48 object-cover rounded-t-xl" />
-                        <div class="portfolio-title p-4 text-center text-lg font-medium text-white">BANNER DESIGN</div>
-                    </div>
-                    <!-- Portfolio Item 5 -->
-                    <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer"
-                        tabindex="0" role="button" aria-pressed="false" data-type="image" data-src="land POSSESSING AN EXCELLENT SPIRIT.jpg"
-                        aria-label="View picture Project 5: Flyer Design">
-                        <img src="land POSSESSING AN EXCELLENT SPIRIT.jpg" alt="FLYER" class="portfolio-img w-full h-48 object-cover rounded-t-xl" />
-                        <div class="portfolio-title p-4 text-center text-lg font-medium text-white">FLYER</div>
-                    </div>
-                    <!-- Portfolio Item 6 -->
-                    <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer"
-                        tabindex="0" role="button" aria-pressed="false" data-type="image" data-src="EBOMUCHE BURIAL.jpg"
-                        aria-label="View picture Project 6: Book Cover">
-                        <img src="EBOMUCHE BURIAL.jpg" alt="BOOK COVER" class="portfolio-img w-full h-48 object-cover rounded-t-xl" />
-                        <div class="portfolio-title p-4 text-center text-lg font-medium text-white">BOOK COVER</div>
-                    </div>
-                    <!-- Portfolio Item 7 (Placeholder for missing image) -->
-                    <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer"
-                        tabindex="0" role="button" aria-pressed="false" data-type="image" data-src=""
-                        aria-label="View picture Project 7: Another Book Cover">
-                        <img src="img (5).jpg" alt="BOOK COVER" class="portfolio-img w-full h-48 object-cover rounded-t-xl" />
-                        <div class="portfolio-title p-4 text-center text-lg font-medium text-white">Concert Flyer</div>
-                    </div>
-                </div>
-                  <!-- Button Link Section -->
-                    <section class="py-8 px-4">
-                        <div class="container mx-auto text-center">
-                            <a href="https://www.behance.net/gallery/227292143/FLYERS" target="_blank" rel="noopener noreferrer"
-                            class="inline-block bg-amber-500 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-amber-600 hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1">
-                                View More
-                            </a>
-                        </div>
-                    </section>
-            </div>
+  /* Style for the close button */
+  .modal-close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 1010; /* Ensure it's on top of the modal content */
+  }
+  </style>
+ </head>
+ <body class="bg-black text-white">
+  <header class="bg-gray-900 shadow-md p-4 rounded-b-lg mb-8">
+  <div class="container mx-auto flex justify-between items-center px-4">
+  <h1 class="text-3xl font-bold text-amber-400">RHOG STUDIO</h1>
+  </div>
+  </header>
+ 
+
+  <section class="py-8 px-4">
+  <div class="container mx-auto">
+  <div class="portfolio-category mb-12" id="pictures">
+  <h2 class="text-4xl font-extrabold text-center text-amber-400 mb-8">Our Creative Portfolio</h2>
+  <h4 class="text-2xl font-semibold text-center text-white mb-6">Pictures</h4>
+  <div class="portfolio-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+  <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer"
+  tabindex="0" role="button" aria-pressed="false" data-type="image" data-src="RHOG BRAND ,,.jpg"
+  aria-label="View picture Project 1: RHOG BRAND ,,.jpg">
+  <img src="RHOG BRAND ,,.jpg" alt="BRAND" class="portfolio-img w-full h-48 object-cover rounded-t-xl" />
+  <div class="portfolio-title p-4 text-center text-lg font-medium text-white">BRAND</div>
+  </div>
+  <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer"
+  tabindex="0" role="button" aria-pressed="false" data-type="image" data-src="img (1).jpg"
+  aria-label="View picture Project 2: Urban Poster">
+  <img src="img (1).jpg" alt="SAHPS WEEK" class="portfolio-img w-full h-48 object-cover rounded-t-xl" />
+  <div class="portfolio-title p-4 text-center text-lg font-medium text-white">SAHPS WEEK</div>
+  </div>
+  <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer"
+  tabindex="0" role="button" aria-pressed="false" data-type="image" data-src="img (2).jpg"
+  aria-label="View picture Project 3: Colorful Shapes">
+  <img src="img (2).jpg" alt="BIRTHDAY DESIGN" class="portfolio-img w-full h-48 object-cover rounded-t-xl" />
+  <div class="portfolio-title p-4 text-center text-lg font-medium text-white">BIRTHDAY</div>
+  </div>
+  <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer"
+  tabindex="0" role="button" aria-pressed="false" data-type="image" data-src="img (6).jpg"
+  aria-label="View picture Project 4: Modern Typography">
+  <img src="img (6).jpg" alt="BANNER DESIGN" class="portfolio-img w-full h-48 object-cover rounded-t-xl" />
+  <div class="portfolio-title p-4 text-center text-lg font-medium text-white">BANNER DESIGN</div>
+  </div>
+  <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer"
+  tabindex="0" role="button" aria-pressed="false" data-type="image" data-src="land POSSESSING AN EXCELLENT SPIRIT.jpg"
+  aria-label="View picture Project 5: Flyer Design">
+  <img src="land POSSESSING AN EXCELLENT SPIRIT.jpg" alt="FLYER" class="portfolio-img w-full h-48 object-cover rounded-t-xl" />
+  <div class="portfolio-title p-4 text-center text-lg font-medium text-white">FLYER</div>
+  </div>
+  <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer"
+  tabindex="0" role="button" aria-pressed="false" data-type="image" data-src="EBOMUCHE BURIAL.jpg"
+  aria-label="View picture Project 6: Book Cover">
+  <img src="EBOMUCHE BURIAL.jpg" alt="BOOK COVER" class="portfolio-img w-full h-48 object-cover rounded-t-xl" />
+  <div class="portfolio-title p-4 text-center text-lg font-medium text-white">BOOK COVER</div>
+  </div>
+  <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer"
+  tabindex="0" role="button" aria-pressed="false" data-type="image" data-src=""
+  aria-label="View picture Project 7: Another Book Cover">
+  <img src="img (5).jpg" alt="BOOK COVER" class="portfolio-img w-full h-48 object-cover rounded-t-xl" />
+  <div class="portfolio-title p-4 text-center text-lg font-medium text-white">Concert Flyer</div>
+  </div>
+  </div>
+  <section class="py-8 px-4">
+  <div class="container mx-auto text-center">
+  <a href="https://www.behance.net/gallery/227292143/FLYERS" target="_blank" rel="noopener noreferrer"
+  class="inline-block bg-amber-500 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-amber-600 hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1">
+  View More
+  </a>
+  </div>
+  </section>
+  </div>
+  </div>
+ 
+
+  <div id="imageModal" class="modal-backdrop">
+  <span class="modal-close-btn" onclick="closeModal()">&times;</span>
+  <div class="modal-content">
+  <img id="modalImage" src="" alt="Full Size Image">
+  </div>
+  </div>
+ 
+
+  <script>
+  const portfolioItems = document.querySelectorAll('.portfolio-item');
+  const modal = document.getElementById('imageModal');
+  const modalImage = document.getElementById('modalImage');
+ 
+
+  portfolioItems.forEach(item => {
+  item.addEventListener('click', () => {
+  modalImage.src = item.getAttribute('data-src');
+  modal.style.display = 'flex'; // Show the modal
+  });
+  });
+ 
+
+  function closeModal() {
+  modal.style.display = 'none'; // Hide the modal
+  }
+  </script>
+ </body>
+ </html>
