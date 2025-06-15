@@ -24,30 +24,85 @@ a:focus {
     text-decoration: underline;
 }
 /* Header */
+/* General header styling */
 header {
     background-color: var(--black);
     border-bottom: 3px solid var(--gold);
     padding: 1rem 2rem;
     display: flex;
-    justify-content: flex-start; /* Default for larger screens */
+    /* Changed to space-between to push menu to the right automatically */
+    justify-content: space-between;
     align-items: center;
     position: sticky;
     top: 0;
     z-index: 100;
 }
+
+/* NEW: Styles for the wrapper holding the logo and text */
+.logo-text-wrapper {
+    display: flex; /* Make this a flex container */
+    align-items: center; /* Vertically align logo and text */
+    gap: 10px; /* Adds 10px space between the logo and the text */
+    /* Remove padding-right from .Logo, as this gap will handle spacing */
+}
+
+/* Styling for the logo image */
 header .Logo {
     height: 12vh;
     max-height: 80px;
     width: auto;
-    text-align: center;
-    padding-right: 1rem;
+    /* Remove padding-right from here, the .logo-text-wrapper's 'gap' will manage spacing */
+    /* padding-right: 1rem; */
 }
+
+/* Styling for the 'RHOG STUDIO' text */
 header span {
     font-weight: 800;
     font-size: 1.2rem;
     letter-spacing: 2px;
     color: var(--gold);
-    white-space: nowrap;
+    white-space: nowrap; /* Prevents text from wrapping to a new line */
+}
+
+/* --- Media Query for Mobile Specific Adjustments --- */
+@media (max-width: 768px) {
+    header {
+        padding: 10px 15px; /* Adjust padding for mobile */
+        /* Using space-between on header handles alignment */
+    }
+
+    .logo-text-wrapper {
+        gap: 5px; /* Smaller gap on mobile */
+    }
+
+    header .Logo {
+        height: 40px; /* Smaller logo on mobile */
+        max-height: 40px; /* Ensure it stays small */
+    }
+
+    header span {
+        font-size: 1em; /* Smaller text on mobile */
+    }
+
+    /* No need for margin-left: auto on .hamburger-menu if header is justify-content: space-between */
+
+    /* Existing nav-links mobile styling */
+    .nav-links {
+        flex-direction: column;
+        position: absolute;
+        top: var(--header-height, 60px); /* Use a CSS variable or fixed value */
+        left: 0;
+        width: 100%;
+        background-color: var(--black); /* Match header background */
+        border-top: 1px solid var(--gold);
+        display: none;
+        transition: all 0.3s ease-in-out;
+        z-index: 99;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
 }
 
 /* Hamburger Menu Button */
