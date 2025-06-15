@@ -1,32 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>RHOG STUDIO - Graphic Design & Large Printing</title>
-<link rel="stylesheet" href="./RHOG.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RHOG STUDIO - Graphic Design & Large Printing</title>
+    <link rel="icon" href="RHOG LOGO.png" type="image/png">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Optional: Custom font for a clean look */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Styles for the modal backdrop */
+        .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.85); /* Darker, slightly transparent background */
+            z-index: 1000; /* Ensure it's on top */
+        }
+
+        /* Styles for the modal content container */
+        .modal-content {
+            max-width: 90vw;
+            max-height: 90vh;
+            width: auto;
+            height: auto;
+            overflow: hidden; /* Hide overflow from media */
+            background-color: #1a1a1a; /* Dark background for modal */
+            border-radius: 1rem; /* Rounded corners */
+            position: relative; /* For positioning the close button */
+        }
+
+        /* Styles for media inside the modal */
+        .modal-content img,
+        .modal-content video {
+            display: block;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain; /* Ensure entire image/video is visible */
+            border-radius: 0.75rem; /* Match modal corners partially */
+        }
+    </style>
 </head>
-<body>
-<section id="portfolio" class="portfolio" aria-label="Portfolio Section">
-    <h3>Portfolio</h3>
-
-    <div class="portfolio-category" id="videos">
-      <h4>Videos</h4>
-      <div class="portfolio-grid">
-        <div class="portfolio-item" tabindex="0" role="button" aria-pressed="false" data-type="video" data-src="WCF VIDEO.mp4" aria-label="Play video Project 1: STICKER">
-          <video class="portfolio-video" muted preload="metadata" playsinline>
-            <source src="WCF VIDEO.mp4" type="video/mp4" />
-            
-          </video>
-          <div class="portfolio-title">REFLECTIVE STICKER</div>
+<body class="bg-black text-white">
+    <!-- Header Section -->
+    <header class="bg-gray-900 shadow-md p-4 rounded-b-lg mb-8">
+        <div class="container mx-auto flex justify-between items-center px-4">
+            <h1 class="text-3xl font-bold text-amber-400">RHOG STUDIO</h1>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="#pictures" class="text-amber-300 hover:text-amber-400 transition duration-300">Pictures</a></li>
+                    <li><a href="#videos" class="text-amber-300 hover:text-amber-400 transition duration-300">Videos</a></li>
+                    <li><a href="#" class="text-amber-300 hover:text-amber-400 transition duration-300">Services</a></li>
+                    <li><a href="#" class="text-amber-300 hover:text-amber-400 transition duration-300">Contact</a></li>
+                </ul>
+            </nav>
         </div>
-        <div class="portfolio-item" tabindex="0" role="button" aria-pressed="false" data-type="video" data-src="KEYHOLDER VIDEO.mp4" aria-label="Play video Project 2: KEYHOLDER">
-          <video class="portfolio-video" muted preload="metadata" playsinline>
-            <source src="KEYHOLDER VIDEO.mp4" type="video/mp4" />
+    </header>
 
-          </video>
-          <div class="portfolio-title">KEYHOLDER</div>
+    
+
+            <!-- Videos Category -->
+            <div class="portfolio-category mt-12" id="videos">
+                <h4 class="text-2xl font-semibold text-center text-white mb-6">Videos</h4>
+                <div class="portfolio-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <!-- Video Item 1 -->
+                    <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer"
+                        tabindex="0" role="button" aria-pressed="false" data-type="video" data-src="WCF VIDEO.mp4" aria-label="Play video Project 1: STICKER">
+                        <video class="portfolio-video w-full h-48 object-cover rounded-t-xl" muted preload="metadata" playsinline>
+                            <source src="WCF VIDEO.mp4" type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="portfolio-title p-4 text-center text-lg font-medium text-white">REFLECTIVE STICKER</div>
+                    </div>
+                    <!-- Video Item 2 -->
+                    <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer"
+                        tabindex="0" role="button" aria-pressed="false" data-type="video" data-src="KEYHOLDER VIDEO.mp4" aria-label="Play video Project 2: KEYHOLDER">
+                        <video class="portfolio-video w-full h-48 object-cover rounded-t-xl" muted preload="metadata" playsinline>
+                            <source src="KEYHOLDER VIDEO.mp4" type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="portfolio-title p-4 text-center text-lg font-medium text-white">KEYHOLDER</div>
+                    </div>
+                      <!-- Video Item 3 -->
+                    <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer"
+                        tabindex="0" role="button" aria-pressed="false" data-type="video" data-src="KEYHOLDER VIDEO.mp4" aria-label="Play video Project 2: KEYHOLDER">
+                        <video class="portfolio-video w-full h-48 object-cover rounded-t-xl" muted preload="metadata" playsinline>
+                            <source src="BANNER VIDEO.mp4" type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="portfolio-title p-4 text-center text-lg font-medium text-white">KEYHOLDER</div>
+                    </div>
+                      <!-- Video Item 4 -->
+                    <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer"
+                        tabindex="0" role="button" aria-pressed="false" data-type="video" data-src="KEYHOLDER VIDEO.mp4" aria-label="Play video Project 2: KEYHOLDER">
+                        <video class="portfolio-video w-full h-48 object-cover rounded-t-xl" muted preload="metadata" playsinline>
+                            <source src="BUKS VIDEO.mp4" type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="portfolio-title p-4 text-center text-lg font-medium text-white">KEYHOLDER</div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+    </section>
+
+    <!-- Button Link Section -->
+    <section class="py-8 px-4">
+        <div class="container mx-auto text-center">
+            <a href="https://www.behance.net/gallery/227292143/FLYERS" target="_blank" rel="noopener noreferrer"
+               class="inline-block bg-amber-500 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-amber-600 hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1">
+                View More
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-900 text-white p-6 mt-8 rounded-t-lg">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2025 RHOG STUDIO. All rights reserved.</p>
+            <p class="mt-2 text-sm">Graphic Design & Large Printing Solutions</p>
+        </div>
+    </footer>
+
+    <!-- The Modal HTML Structure -->
+    <div id="mediaModal" class="fixed inset-0 hidden items-center justify-center modal-backdrop transition-opacity duration-300 opacity-0">
+        <div class="modal-content relative p-4 flex flex-col items-center justify-center">
+            <!-- Media content will be inserted here by JavaScript -->
+            <div id="modalMediaContainer" class="relative w-full h-full flex items-center justify-center"></div>
+
+            <!-- Close Button -->
+            <button id="closeModalBtn" class="absolute top-4 right-4 bg-gray-700 text-white rounded-full p-2 text-xl leading-none w-10 h-10 flex items-center justify-center transition-colors duration-200 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50"
+                    aria-label="Close modal">
+                &times;
+            </button>
+        </div>
     </div>
-  </body>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
+            const mediaModal = document.getElementById('mediaModal');
+            const modalMediaContainer = document.getElementById('modalMediaContainer');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+
+            // Function to open the modal
+            const openModal = (type, src) => {
+                // Clear any existing content in the modal
+                modalMediaContainer.innerHTML = '';
+
+                let mediaElement;
+                if (type === 'image') {
+                    mediaElement = document.createElement('img');
+                    mediaElement.src = src;
+                    mediaElement.alt = 'Portfolio Image';
+                    mediaElement.classList.add('rounded-lg'); // Add styling for image in modal
+                } else if (type === 'video') {
+                    mediaElement = document.createElement('video');
+                    mediaElement.src = src;
+                    mediaElement.controls = true; // Show video controls
+                    mediaElement.autoplay = true; // Autoplay video
+                    mediaElement.loop = true; // Loop video
+                    mediaElement.muted = false; // Unmute video in modal
+                    mediaElement.preload = 'auto'; // Preload video for better experience
+                    mediaElement.classList.add('rounded-lg'); // Add styling for video in modal
+                }
+
+                if (mediaElement) {
+                    modalMediaContainer.appendChild(mediaElement);
+                    mediaModal.classList.remove('hidden', 'opacity-0');
+                    mediaModal.classList.add('flex', 'opacity-100'); // Use flex to center, transition opacity
+                }
+            };
+
+            // Function to close the modal
+            const closeModal = () => {
+                // Pause any playing video before closing
+                const currentVideo = modalMediaContainer.querySelector('video');
+                if (currentVideo) {
+                    currentVideo.pause();
+                }
+                mediaModal.classList.remove('flex', 'opacity-100');
+                mediaModal.classList.add('hidden', 'opacity-0'); // Hide and transition opacity
+                modalMediaContainer.innerHTML = ''; // Clear content
+            };
+
+            // Add click listeners to all portfolio items
+            portfolioItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const dataType = item.getAttribute('data-type');
+                    const dataSource = item.getAttribute('data-src');
+                    openModal(dataType, dataSource);
+                });
+            });
+
+            // Add click listener to close button
+            closeModalBtn.addEventListener('click', closeModal);
+
+            // Add click listener to modal backdrop to close modal
+            mediaModal.addEventListener('click', (event) => {
+                // Close only if clicking directly on the backdrop, not on the content
+                if (event.target === mediaModal) {
+                    closeModal();
+                }
+            });
+
+            // Add keyboard listener for Escape key to close modal
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && !mediaModal.classList.contains('hidden')) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

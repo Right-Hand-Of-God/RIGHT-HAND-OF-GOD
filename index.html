@@ -4,22 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>RHOG STUDIO - Graphic Design & Large Printing</title>
-    <!-- Link to your CSS file -->
     <link rel="stylesheet" href="./RHOG.css">
+    <link rel="icon" href="RHOG LOGO.png" type="image/png">
 </head>
 <body>
     <header>
-        <!-- Logo Image -->
         <img class="Logo" src="RHOG LOGO.png" alt="RHOG Studio Logo" loading="lazy">
-        <!-- Studio Name -->
         <span>RHOG STUDIO</span>
-        <!-- Hamburger Menu Button for mobile navigation -->
         <button class="hamburger-menu" aria-label="Toggle navigation" aria-expanded="false">
             <span class="bar"></span>
             <span class="bar"></span>
             <span class="bar"></span>
         </button>
-        <!-- Main Navigation -->
         <nav>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
@@ -29,7 +25,6 @@
         </nav>
     </header>
 
-    <!-- Hero Section: Introduction and Call to Action -->
     <section class="hero" aria-label="Introduction Section">
         <h2>Graphic Design & Large Printing Excellence</h2>
         <p>...with a speed of divine ideas</p>
@@ -37,36 +32,29 @@
     </section>
 
     <main>
-        <!-- About Section -->
         <section id="about" class="about">
             <h3>About RHOG STUDIO</h3>
             <p>RHOG STUDIO is a premier Graphic Design and Large Printing Company dedicated to delivering high-quality, creative solutions to bring your brand to life. With cutting-edge technology and a passionate design team, we ensure every project stands out with elegance and impact.</p>
         </section>
 
-        <!-- Services Section -->
         <section id="services" class="services-section">
             <h3>Our Services</h3>
             <div class="services" role="list">
-                <!-- Graphic Design Service Card -->
                 <article class="service-card" role="listitem" tabindex="0">
                     <div class="service-icon" aria-hidden="true">🎨</div>
                     <h4 class="service-title">Graphic Design</h4>
-                    <!-- Description moved above the button -->
                     <p class="service-desc">Custom logos, branding, marketing materials, and creative visuals tailored to your business needs.</p>
                     <a href="Portfolio images.html"> <button class="button-design">DESIGNS</button></a>
                 </article>
-                <!-- Large Format Printing Service Card -->
                 <article class="service-card" role="listitem" tabindex="0">
                     <div class="service-icon" aria-hidden="true">🖨</div>
                     <h4 class="service-title">Large Format Printing</h4>
-                    <!-- Description moved above the button -->
                     <p class="service-desc">Banners, posters, vehicle wraps, and signs with vibrant colors and durable finishes for indoor and outdoor use.</p>
                     <a href="Portfolio Video.html"><button class="button-printing">VIDEOS</button> </a>
                 </article>
             </div>
         </section>
 
-        <!-- Contact Section -->
         <section id="contact" class="contact">
             <h3>Contact Us</h3>
             <form id="contact-form" action="https://formspree.io/f/mblyyjez" method="POST" field="My Email">
@@ -78,7 +66,6 @@
                     Email:
                     <input type="email" name="email" required>
                 </label>
-                <!-- New Phone Number Field -->
                 <label>
                     PHONE NUMBER (Country Code Included):
                     <input type="tel" name="phone" placeholder="+234 801 234 5678" required>
@@ -90,7 +77,6 @@
                 <button type="submit" id="submit-button">Send</button>
             </form>
 
-            <!-- CEO Information -->
             <div class="ceo-info">
                 <img src="C.E.O.jpg" alt="Profile of Oyetunji Ebenezer, CEO of RHOG Studio" class="circle-image" loading="lazy">
                 <p>My name is Oyetunji Ebenezer, the CEO, and I’m glad you stopped by! We specialize in graphic design and printing, offering high-quality, creative solutions to bring your ideas to life. From eye-catching designs to professional prints, we’re here to make your brand stand out. I am based in Nigeria. Thank you for visiting our site, your support means everything, and I look forward to working with you!</p>
@@ -99,21 +85,18 @@
         </section>
     </main>
 
-    <!-- Footer -->
     <footer>
         &copy; 2025 RHOG STUDIO. All rights reserved.
     </footer>
 
-    <!-- Lightbox Overlay for portfolio images/videos (currently not linked to portfolio items in this HTML) -->
     <div id="lightbox-overlay" role="dialog" aria-modal="true" aria-hidden="true">
         <div id="lightbox-content">
             <button id="lightbox-close" aria-label="Close">&times;</button>
         </div>
     </div>
 
-    
 
-    <!-- Simple Loading Spinner -->
+
     <div id="loading-spinner" class="hidden">
         <div class="spinner"></div>
     </div>
