@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>RHOG STUDIO - Graphic Design & Large Printing</title>
+    <!-- Ensure your RHOG.css file contains the media queries for mobile navigation -->
     <link rel="stylesheet" href="./RHOG.css">
     <link rel="icon" href="RHOG LOGO.png" type="image/png">
 </head>
@@ -11,7 +12,7 @@
     <header>
         <img class="Logo" src="RHOG LOGO.png" alt="RHOG Studio Logo" loading="lazy">
         <span>RHOG STUDIO</span>
-        <button class="hamburger-menu" aria-label="Toggle navigation" aria-expanded="false">
+        <button class="hamburger-menu" aria-label="Toggle navigation" aria="false">
             <span class="bar"></span>
             <span class="bar"></span>
             <span class="bar"></span>
@@ -89,13 +90,19 @@
         &copy; 2025 RHOG STUDIO. All rights reserved.
     </footer>
 
+    <!-- Custom Message Box Structure -->
+    <div id="message-box-overlay" class="hidden" role="dialog" aria-modal="true" aria-hidden="true">
+        <div id="message-box-content">
+            <p id="message-box-text"></p>
+            <button id="message-box-ok">OK</button>
+        </div>
+    </div>
+
     <div id="lightbox-overlay" role="dialog" aria-modal="true" aria-hidden="true">
         <div id="lightbox-content">
             <button id="lightbox-close" aria-label="Close">&times;</button>
         </div>
     </div>
-
-
 
     <div id="loading-spinner" class="hidden">
         <div class="spinner"></div>
@@ -110,6 +117,8 @@
             hamburgerMenu.addEventListener('click', function () {
                 // Toggle the 'active' class to show/hide the navigation links
                 navLinks.classList.toggle('active');
+                // Also toggle 'active' class on hamburger menu for the CSS animation (e.g., turning into an 'X')
+                hamburgerMenu.classList.toggle('active');
                 // Update aria-expanded attribute for accessibility
                 hamburgerMenu.setAttribute('aria-expanded', navLinks.classList.contains('active'));
             });
@@ -118,6 +127,7 @@
             document.querySelectorAll('.nav-links a').forEach(link => {
                 link.addEventListener('click', () => {
                     navLinks.classList.remove('active');
+                    hamburgerMenu.classList.remove('active'); // Remove active class from hamburger too
                     hamburgerMenu.setAttribute('aria-expanded', 'false');
                 });
             });
@@ -260,6 +270,8 @@
         });
 
         // Attach event listeners to portfolio items (these elements are expected to be on separate portfolio pages)
+        // Note: These elements (.portfolio-item) are not present in THIS HTML snippet,
+        // but this JS is kept for continuity with your original code structure.
         document.querySelectorAll('.portfolio-item').forEach(item => {
             item.addEventListener('click', () => {
                 openLightbox(item.dataset.type, item.dataset.src);
