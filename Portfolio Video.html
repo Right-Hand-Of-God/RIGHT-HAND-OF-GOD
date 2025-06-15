@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RHOG STUDIO - Graphic Design & Large Printing</title>
     <link rel="icon" href="RHOG LOGO.png" type="image/png">
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* Optional: Custom font for a clean look */
@@ -15,8 +14,9 @@
 
         /* Styles for the modal backdrop */
         .modal-backdrop {
-            background-color: rgba(0, 0, 0, 0.85); /* Darker, slightly transparent background */
+            background-color: rgba(0, 0, 0, 0.95); /* Darker, more opaque background */
             z-index: 1000; /* Ensure it's on top */
+            transition: opacity 0.3s ease-out; /* Smooth fade-in/out */
         }
 
         /* Styles for the modal content container */
@@ -29,6 +29,15 @@
             background-color: #1a1a1a; /* Dark background for modal */
             border-radius: 1rem; /* Rounded corners */
             position: relative; /* For positioning the close button */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7); /* Deeper shadow */
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out; /* Smooth transform and opacity */
+            transform: scale(0.9); /* Start slightly smaller for transition */
+            opacity: 0; /* Start hidden for transition */
+        }
+
+        .modal-content.is-active {
+            transform: scale(1); /* Scale to normal size */
+            opacity: 1; /* Fully visible */
         }
 
         /* Styles for media inside the modal */
@@ -40,87 +49,121 @@
             object-fit: contain; /* Ensure entire image/video is visible */
             border-radius: 0.75rem; /* Match modal corners partially */
         }
+
+        /* Portfolio item hover effect */
+        .portfolio-item {
+            position: relative; /* For play icon positioning */
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6); /* Deeper shadow on hover */
+        }
+
+        /* Play icon for video thumbnails */
+        .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem; /* Large play icon */
+            color: rgba(255, 255, 255, 0.8); /* Slightly transparent white */
+            pointer-events: none; /* Allow clicks to pass through to the parent */
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .portfolio-item:hover .play-icon {
+            opacity: 1; /* Show play icon on hover */
+        }
+
+        /* Close button styling */
+        #closeModalBtn {
+            background-color: rgba(75, 85, 99, 0.7); /* Slightly transparent gray */
+            backdrop-filter: blur(5px); /* Frosted glass effect */
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        #closeModalBtn:hover {
+            background-color: rgba(107, 114, 128, 0.9); /* Darker on hover */
+        }
     </style>
 </head>
 <body class="bg-black text-white">
-    <!-- Header Section -->
     <header class="bg-gray-900 shadow-md p-4 rounded-b-lg mb-8">
         <div class="container mx-auto flex justify-between items-center px-4">
             <h1 class="text-3xl font-bold text-amber-400">RHOG STUDIO</h1>
         </div>
     </header>
 
-    
-
-            <!-- Videos Category -->
+    <section class="py-8 px-4">
+        <div class="container mx-auto">
             <div class="portfolio-category mt-12" id="videos">
                 <h4 class="text-2xl font-semibold text-center text-white mb-6">Videos</h4>
                 <div class="portfolio-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    <!-- Video Item 1 -->
-                    <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer"
-                        tabindex="0" role="button" aria-pressed="false" data-type="video" data-src="WCF VIDEO.mp4" aria-label="Play video Project 1: STICKER">
+                    <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer"
+                        tabindex="0" role="button" aria-pressed="false" data-type="video" data-src="WCF VIDEO.mp4" aria-label="Play video Project 1: REFLECTIVE STICKER">
                         <video class="portfolio-video w-full h-48 object-cover rounded-t-xl" muted preload="metadata" playsinline>
                             <source src="WCF VIDEO.mp4" type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
-                        <div class="portfolio-title p-4 text-center text-lg font-medium text-white">REFLECTIVE STICKER</div>
+                        <div class="play-icon">&#9658;</div> <div class="portfolio-title p-4 text-center text-lg font-medium text-white">REFLECTIVE STICKER</div>
                     </div>
-                    <!-- Video Item 2 -->
-                    <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer"
+                    <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer"
                         tabindex="0" role="button" aria-pressed="false" data-type="video" data-src="KEYHOLDER VIDEO.mp4" aria-label="Play video Project 2: KEYHOLDER">
                         <video class="portfolio-video w-full h-48 object-cover rounded-t-xl" muted preload="metadata" playsinline>
                             <source src="KEYHOLDER VIDEO.mp4" type="video/mp4" />
+                            Your browser does not support the video tag.
                         </video>
-                        <div class="portfolio-title p-4 text-center text-lg font-medium text-white">KEYHOLDER</div>
+                        <div class="play-icon">&#9658;</div> <div class="portfolio-title p-4 text-center text-lg font-medium text-white">KEYHOLDER</div>
                     </div>
-                      <!-- Video Item 3 -->
-                    <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer"
-                        tabindex="0" role="button" aria-pressed="false" data-type="video" data-src="KEYHOLDER VIDEO.mp4" aria-label="Play video Project 2: KEYHOLDER">
+                      <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer"
+                        tabindex="0" role="button" aria-pressed="false" data-type="video" data-src="BANNER VIDEO.mp4" aria-label="Play video Project 3: Banner">
                         <video class="portfolio-video w-full h-48 object-cover rounded-t-xl" muted preload="metadata" playsinline>
                             <source src="BANNER VIDEO.mp4" type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
-                        <div class="portfolio-title p-4 text-center text-lg font-medium text-white">Banner</div>
+                        <div class="play-icon">&#9658;</div> <div class="portfolio-title p-4 text-center text-lg font-medium text-white">Banner</div>
                     </div>
-                      <!-- Video Item 4 -->
-                    <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer"
-                        tabindex="0" role="button" aria-pressed="false" data-type="video" data-src="KEYHOLDER VIDEO.mp4" aria-label="Play video Project 2: KEYHOLDER">
+                      <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer"
+                        tabindex="0" role="button" aria-pressed="false" data-type="video" data-src="BUKS VIDEO.mp4" aria-label="Play video Project 4: Kiss Cut Sticker">
                         <video class="portfolio-video w-full h-48 object-cover rounded-t-xl" muted preload="metadata" playsinline>
                             <source src="BUKS VIDEO.mp4" type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
-                        <div class="portfolio-title p-4 text-center text-lg font-medium text-white">Kiss Cut Sticker</div>
+                        <div class="play-icon">&#9658;</div> <div class="portfolio-title p-4 text-center text-lg font-medium text-white">Kiss Cut Sticker</div>
                     </div>
-                    <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer"
-                        tabindex="0" role="button" aria-pressed="false" data-type="video" data-src="KEYHOLDER VIDEO.mp4" aria-label="Play video Project 2: KEYHOLDER">
+                    <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer"
+                        tabindex="0" role="button" aria-pressed="false" data-type="video" data-src="BUKS VIDEO.mp4" aria-label="Play video Project 5: Kiss Cut Sticker">
                         <video class="portfolio-video w-full h-48 object-cover rounded-t-xl" muted preload="metadata" playsinline>
                             <source src="BUKS VIDEO.mp4" type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
-                        <div class="portfolio-title p-4 text-center text-lg font-medium text-white">Kiss Cut Sticker</div>
+                        <div class="play-icon">&#9658;</div> <div class="portfolio-title p-4 text-center text-lg font-medium text-white">Kiss Cut Sticker</div>
                     </div>
-                    <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer"
-                        tabindex="0" role="button" aria-pressed="false" data-type="video" data-src="KEYHOLDER VIDEO.mp4" aria-label="Play video Project 2: KEYHOLDER">
+                    <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer"
+                        tabindex="0" role="button" aria-pressed="false" data-type="video" data-src="BOOKLET.mp4" aria-label="Play video Project 6: Booklet">
                         <video class="portfolio-video w-full h-48 object-cover rounded-t-xl" muted preload="metadata" playsinline>
                             <source src="BOOKLET.mp4" type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
-                        <div class="portfolio-title p-4 text-center text-lg font-medium text-white">Booklet</div>
+                        <div class="play-icon">&#9658;</div> <div class="portfolio-title p-4 text-center text-lg font-medium text-white">Booklet</div>
                     </div>
-                    <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer"
-                        tabindex="0" role="button" aria-pressed="false" data-type="video" data-src="KEYHOLDER VIDEO.mp4" aria-label="Play video Project 2: KEYHOLDER">
+                    <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer"
+                        tabindex="0" role="button" aria-pressed="false" data-type="video" data-src="CLOTH BRANDING.mp4" aria-label="Play video Project 7: Cloth Branding">
                         <video class="portfolio-video w-full h-48 object-cover rounded-t-xl" muted preload="metadata" playsinline>
                             <source src="CLOTH BRANDING.mp4" type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
-                        <div class="portfolio-title p-4 text-center text-lg font-medium text-white">Cloth Branding</div>
+                        <div class="play-icon">&#9658;</div> <div class="portfolio-title p-4 text-center text-lg font-medium text-white">Cloth Branding</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Button Link Section -->
     <section class="py-8 px-4">
         <div class="container mx-auto text-center">
             <a href="https://www.behance.net/gallery/227292143/FLYERS" target="_blank" rel="noopener noreferrer"
@@ -130,7 +173,6 @@
         </div>
     </section>
 
-    <!-- Footer Section -->
     <footer class="bg-gray-900 text-white p-6 mt-8 rounded-t-lg">
         <div class="container mx-auto text-center">
             <p>&copy; 2025 RHOG STUDIO. All rights reserved.</p>
@@ -138,14 +180,11 @@
         </div>
     </footer>
 
-    <!-- The Modal HTML Structure -->
-    <div id="mediaModal" class="fixed inset-0 hidden items-center justify-center modal-backdrop transition-opacity duration-300 opacity-0">
+    <div id="mediaModal" class="fixed inset-0 hidden items-center justify-center modal-backdrop">
         <div class="modal-content relative p-4 flex flex-col items-center justify-center">
-            <!-- Media content will be inserted here by JavaScript -->
             <div id="modalMediaContainer" class="relative w-full h-full flex items-center justify-center"></div>
 
-            <!-- Close Button -->
-            <button id="closeModalBtn" class="absolute top-4 right-4 bg-gray-700 text-white rounded-full p-2 text-xl leading-none w-10 h-10 flex items-center justify-center transition-colors duration-200 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50"
+            <button id="closeModalBtn" class="absolute top-4 right-4 text-white rounded-full p-2 text-xl leading-none w-10 h-10 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50"
                     aria-label="Close modal">
                 &times;
             </button>
@@ -183,8 +222,13 @@
 
                 if (mediaElement) {
                     modalMediaContainer.appendChild(mediaElement);
-                    mediaModal.classList.remove('hidden', 'opacity-0');
-                    mediaModal.classList.add('flex', 'opacity-100'); // Use flex to center, transition opacity
+                    mediaModal.classList.remove('hidden');
+                    mediaModal.classList.add('flex'); // Use flex to center
+                    // Add a slight delay before adding the active class for the transition to work
+                    setTimeout(() => {
+                        mediaModal.querySelector('.modal-content').classList.add('is-active');
+                        mediaModal.classList.add('opacity-100');
+                    }, 10);
                 }
             };
 
@@ -195,9 +239,16 @@
                 if (currentVideo) {
                     currentVideo.pause();
                 }
-                mediaModal.classList.remove('flex', 'opacity-100');
-                mediaModal.classList.add('hidden', 'opacity-0'); // Hide and transition opacity
-                modalMediaContainer.innerHTML = ''; // Clear content
+
+                mediaModal.querySelector('.modal-content').classList.remove('is-active');
+                mediaModal.classList.remove('opacity-100');
+
+                // Wait for the transition to complete before hiding the modal
+                mediaModal.addEventListener('transitionend', function handler() {
+                    mediaModal.classList.add('hidden');
+                    modalMediaContainer.innerHTML = ''; // Clear content
+                    mediaModal.removeEventListener('transitionend', handler);
+                });
             };
 
             // Add click listeners to all portfolio items
