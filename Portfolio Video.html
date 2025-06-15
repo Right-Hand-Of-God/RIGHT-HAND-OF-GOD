@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RHOG STUDIO - Graphic Design & Large Printing</title>
     <link rel="icon" href="RHOG LOGO.png" type="image/png">
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* Optional: Custom font for a clean look */
@@ -71,12 +72,8 @@
             font-size: 3rem; /* Large play icon */
             color: rgba(255, 255, 255, 0.8); /* Slightly transparent white */
             pointer-events: none; /* Allow clicks to pass through to the parent */
-            opacity: 0;
+            opacity: 1; /* Initially visible over the image */
             transition: opacity 0.3s ease-in-out;
-        }
-
-        .portfolio-item:hover .play-icon {
-            opacity: 1; /* Show play icon on hover */
         }
 
         /* Close button styling */
@@ -89,9 +86,24 @@
         #closeModalBtn:hover {
             background-color: rgba(107, 114, 128, 0.9); /* Darker on hover */
         }
+
+        /* Style for the preview image */
+        .portfolio-preview-image {
+            width: 100%;
+            height: 192px; /* h-48 equivalent */
+            object-fit: cover;
+            border-radius: 0.75rem; /* Match video corner radius */
+            display: block; /* Prevent extra space below inline images */
+        }
+
+        /* Hide the actual video tag used for thumbnails, as we're showing an image */
+        .portfolio-item .portfolio-video {
+            display: none;
+        }
     </style>
 </head>
 <body class="bg-black text-white">
+    <!-- Header Section -->
     <header class="bg-gray-900 shadow-md p-4 rounded-b-lg mb-8">
         <div class="container mx-auto flex justify-between items-center px-4">
             <h1 class="text-3xl font-bold text-amber-400">RHOG STUDIO</h1>
@@ -100,70 +112,94 @@
 
     <section class="py-8 px-4">
         <div class="container mx-auto">
+            <!-- Videos Category -->
             <div class="portfolio-category mt-12" id="videos">
                 <h4 class="text-2xl font-semibold text-center text-white mb-6">Videos</h4>
                 <div class="portfolio-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <!-- Video Item 1 -->
                     <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer"
-                        tabindex="0" role="button" aria-pressed="false" data-type="video" data-src="WCF VIDEO.mp4" aria-label="Play video Project 1: REFLECTIVE STICKER">
+                        tabindex="0" role="button" aria-pressed="false" data-type="video" data-src="WCF VIDEO.mp4" data-preview="images/reflective_sticker_preview.jpg" aria-label="Play video Project 1: REFLECTIVE STICKER">
+                        <img src="images/reflective_sticker_preview.jpg" alt="REFLECTIVE STICKER Preview" class="portfolio-preview-image rounded-t-xl">
+                        <!-- The video tag is still here for modal playback but hidden in the thumbnail -->
                         <video class="portfolio-video w-full h-48 object-cover rounded-t-xl" muted preload="metadata" playsinline>
                             <source src="WCF VIDEO.mp4" type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
-                        <div class="play-icon">&#9658;</div> <div class="portfolio-title p-4 text-center text-lg font-medium text-white">REFLECTIVE STICKER</div>
+                        <div class="play-icon">&#9658;</div> <!-- Play icon overlay -->
+                        <div class="portfolio-title p-4 text-center text-lg font-medium text-white">REFLECTIVE STICKER</div>
                     </div>
+                    <!-- Video Item 2 -->
                     <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer"
-                        tabindex="0" role="button" aria-pressed="false" data-type="video" data-src="KEYHOLDER VIDEO.mp4" aria-label="Play video Project 2: KEYHOLDER">
+                        tabindex="0" role="button" aria-pressed="false" data-type="video" data-src="KEYHOLDER VIDEO.mp4" data-preview="images/keyholder_preview.png" aria-label="Play video Project 2: KEYHOLDER">
+                        <img src="images/keyholder_preview.png" alt="KEYHOLDER Preview" class="portfolio-preview-image rounded-t-xl">
                         <video class="portfolio-video w-full h-48 object-cover rounded-t-xl" muted preload="metadata" playsinline>
                             <source src="KEYHOLDER VIDEO.mp4" type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
-                        <div class="play-icon">&#9658;</div> <div class="portfolio-title p-4 text-center text-lg font-medium text-white">KEYHOLDER</div>
+                        <div class="play-icon">&#9658;</div>
+                        <div class="portfolio-title p-4 text-center text-lg font-medium text-white">KEYHOLDER</div>
                     </div>
-                      <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer"
-                        tabindex="0" role="button" aria-pressed="false" data-type="video" data-src="BANNER VIDEO.mp4" aria-label="Play video Project 3: Banner">
+                      <!-- Video Item 3 -->
+                    <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer"
+                        tabindex="0" role="button" aria-pressed="false" data-type="video" data-src="BANNER VIDEO.mp4" data-preview="images/banner_preview.jpg" aria-label="Play video Project 3: Banner">
+                        <img src="images/banner_preview.jpg" alt="Banner Preview" class="portfolio-preview-image rounded-t-xl">
                         <video class="portfolio-video w-full h-48 object-cover rounded-t-xl" muted preload="metadata" playsinline>
                             <source src="BANNER VIDEO.mp4" type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
-                        <div class="play-icon">&#9658;</div> <div class="portfolio-title p-4 text-center text-lg font-medium text-white">Banner</div>
+                        <div class="play-icon">&#9658;</div>
+                        <div class="portfolio-title p-4 text-center text-lg font-medium text-white">Banner</div>
                     </div>
-                      <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer"
-                        tabindex="0" role="button" aria-pressed="false" data-type="video" data-src="BUKS VIDEO.mp4" aria-label="Play video Project 4: Kiss Cut Sticker">
+                      <!-- Video Item 4 -->
+                    <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer"
+                        tabindex="0" role="button" aria-pressed="false" data-type="video" data-src="BUKS VIDEO.mp4" data-preview="images/kiss_cut_sticker_preview.jpg" aria-label="Play video Project 4: Kiss Cut Sticker">
+                        <img src="images/kiss_cut_sticker_preview.jpg" alt="Kiss Cut Sticker Preview" class="portfolio-preview-image rounded-t-xl">
                         <video class="portfolio-video w-full h-48 object-cover rounded-t-xl" muted preload="metadata" playsinline>
                             <source src="BUKS VIDEO.mp4" type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
-                        <div class="play-icon">&#9658;</div> <div class="portfolio-title p-4 text-center text-lg font-medium text-white">Kiss Cut Sticker</div>
+                        <div class="play-icon">&#9658;</div>
+                        <div class="portfolio-title p-4 text-center text-lg font-medium text-white">Kiss Cut Sticker</div>
                     </div>
+                    <!-- Video Item 5 -->
                     <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer"
-                        tabindex="0" role="button" aria-pressed="false" data-type="video" data-src="BUKS VIDEO.mp4" aria-label="Play video Project 5: Kiss Cut Sticker">
+                        tabindex="0" role="button" aria-pressed="false" data-type="video" data-src="BUKS VIDEO.mp4" data-preview="images/kiss_cut_sticker_preview_2.jpg" aria-label="Play video Project 5: Kiss Cut Sticker">
+                        <img src="images/kiss_cut_sticker_preview_2.jpg" alt="Kiss Cut Sticker Preview" class="portfolio-preview-image rounded-t-xl">
                         <video class="portfolio-video w-full h-48 object-cover rounded-t-xl" muted preload="metadata" playsinline>
                             <source src="BUKS VIDEO.mp4" type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
-                        <div class="play-icon">&#9658;</div> <div class="portfolio-title p-4 text-center text-lg font-medium text-white">Kiss Cut Sticker</div>
+                        <div class="play-icon">&#9658;</div>
+                        <div class="portfolio-title p-4 text-center text-lg font-medium text-white">Kiss Cut Sticker</div>
                     </div>
+                    <!-- Video Item 6 -->
                     <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer"
-                        tabindex="0" role="button" aria-pressed="false" data-type="video" data-src="BOOKLET.mp4" aria-label="Play video Project 6: Booklet">
+                        tabindex="0" role="button" aria-pressed="false" data-type="video" data-src="BOOKLET.mp4" data-preview="images/booklet_preview.jpg" aria-label="Play video Project 6: Booklet">
+                        <img src="images/booklet_preview.jpg" alt="Booklet Preview" class="portfolio-preview-image rounded-t-xl">
                         <video class="portfolio-video w-full h-48 object-cover rounded-t-xl" muted preload="metadata" playsinline>
                             <source src="BOOKLET.mp4" type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
-                        <div class="play-icon">&#9658;</div> <div class="portfolio-title p-4 text-center text-lg font-medium text-white">Booklet</div>
+                        <div class="play-icon">&#9658;</div>
+                        <div class="portfolio-title p-4 text-center text-lg font-medium text-white">Booklet</div>
                     </div>
+                    <!-- Video Item 7 -->
                     <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer"
-                        tabindex="0" role="button" aria-pressed="false" data-type="video" data-src="CLOTH BRANDING.mp4" aria-label="Play video Project 7: Cloth Branding">
+                        tabindex="0" role="button" aria-pressed="false" data-type="video" data-src="CLOTH BRANDING.mp4" data-preview="images/cloth_branding_preview.jpg" aria-label="Play video Project 7: Cloth Branding">
+                        <img src="images/cloth_branding_preview.jpg" alt="Cloth Branding Preview" class="portfolio-preview-image rounded-t-xl">
                         <video class="portfolio-video w-full h-48 object-cover rounded-t-xl" muted preload="metadata" playsinline>
                             <source src="CLOTH BRANDING.mp4" type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
-                        <div class="play-icon">&#9658;</div> <div class="portfolio-title p-4 text-center text-lg font-medium text-white">Cloth Branding</div>
+                        <div class="play-icon">&#9658;</div>
+                        <div class="portfolio-title p-4 text-center text-lg font-medium text-white">Cloth Branding</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Button Link Section -->
     <section class="py-8 px-4">
         <div class="container mx-auto text-center">
             <a href="https://www.behance.net/gallery/227292143/FLYERS" target="_blank" rel="noopener noreferrer"
@@ -173,6 +209,7 @@
         </div>
     </section>
 
+    <!-- Footer Section -->
     <footer class="bg-gray-900 text-white p-6 mt-8 rounded-t-lg">
         <div class="container mx-auto text-center">
             <p>&copy; 2025 RHOG STUDIO. All rights reserved.</p>
@@ -180,10 +217,13 @@
         </div>
     </footer>
 
+    <!-- The Modal HTML Structure -->
     <div id="mediaModal" class="fixed inset-0 hidden items-center justify-center modal-backdrop">
         <div class="modal-content relative p-4 flex flex-col items-center justify-center">
+            <!-- Media content will be inserted here by JavaScript -->
             <div id="modalMediaContainer" class="relative w-full h-full flex items-center justify-center"></div>
 
+            <!-- Close Button -->
             <button id="closeModalBtn" class="absolute top-4 right-4 text-white rounded-full p-2 text-xl leading-none w-10 h-10 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50"
                     aria-label="Close modal">
                 &times;
@@ -255,7 +295,8 @@
             portfolioItems.forEach(item => {
                 item.addEventListener('click', () => {
                     const dataType = item.getAttribute('data-type');
-                    const dataSource = item.getAttribute('data-src');
+                    const dataSource = item.getAttribute('data-src'); // This is the video source
+                    // If you wanted to use the preview image as the modal content for images, you'd use data-preview here
                     openModal(dataType, dataSource);
                 });
             });
