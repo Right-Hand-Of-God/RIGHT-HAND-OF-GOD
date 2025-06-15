@@ -175,7 +175,7 @@ nav ul li a:hover {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(rgba(0,0,0,0.7), rgba(0, 0, 0, 0.7)), url('lannding page.jpeg') center/cover no-repeat;
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0, 0, 0, 0.7)), url('background.jpg') center/cover no-repeat;
     background-size: cover;
     background-position: center;
     height: 80vh;
