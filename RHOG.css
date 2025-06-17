@@ -24,101 +24,73 @@ a:focus {
     text-decoration: underline;
 }
 /* Header */
-/* General header styling */
 header {
     background-color: var(--black);
     border-bottom: 3px solid var(--gold);
     padding: 1rem 2rem;
     display: flex;
-    /* Changed to space-between to push menu to the right automatically */
-    justify-content: space-between;
+    justify-content: space-between; /* Pushes content to edges */
     align-items: center;
     position: sticky;
     top: 0;
     z-index: 100;
 }
 
-/* NEW: Styles for the wrapper holding the logo and text */
+/* Logo and Text Wrapper */
 .logo-text-wrapper {
-    display: flex; /* Make this a flex container */
-    align-items: center; /* Vertically align logo and text */
-    gap: 10px; /* Adds 10px space between the logo and the text */
-    /* Remove padding-right from .Logo, as this gap will handle spacing */
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
-
-/* Styling for the logo image */
 header .Logo {
     height: 12vh;
     max-height: 80px;
     width: auto;
-    /* Remove padding-right from here, the .logo-text-wrapper's 'gap' will manage spacing */
-    /* padding-right: 1rem; */
 }
-
-/* Styling for the 'RHOG STUDIO' text */
 header span {
     font-weight: 800;
     font-size: 1.2rem;
     letter-spacing: 2px;
     color: var(--gold);
-    white-space: nowrap; /* Prevents text from wrapping to a new line */
+    white-space: nowrap;
 }
 
-/* --- Media Query for Mobile Specific Adjustments --- */
-@media (max-width: 768px) {
-    header {
-        padding: 10px 15px; /* Adjust padding for mobile */
-        /* Using space-between on header handles alignment */
-    }
-
-    .logo-text-wrapper {
-        gap: 5px; /* Smaller gap on mobile */
-    }
-
-    header .Logo {
-        height: 40px; /* Smaller logo on mobile */
-        max-height: 40px; /* Ensure it stays small */
-    }
-
-    header span {
-        font-size: 1em; /* Smaller text on mobile */
-    }
-
-    /* No need for margin-left: auto on .hamburger-menu if header is justify-content: space-between */
-
-    /* Existing nav-links mobile styling */
-    .nav-links {
-        flex-direction: column;
-        position: absolute;
-        top: var(--header-height, 60px); /* Use a CSS variable or fixed value */
-        left: 0;
-        width: 100%;
-        background-color: var(--black); /* Match header background */
-        border-top: 1px solid var(--gold);
-        display: none;
-        transition: all 0.3s ease-in-out;
-        z-index: 99;
-    }
-
-    .nav-links.active {
-        display: flex;
-    }
+/* Desktop Navigation Menu (Default: visible on large screens) */
+.desktop-menu-container {
+    display: block; /* Visible by default */
+}
+.desktop-nav-links {
+    list-style: none;
+    display: flex; /* Horizontal display for links */
+    margin: 0;
+    padding: 0;
+    gap: 2rem; /* Space between desktop nav items */
+    align-items: center;
+}
+.desktop-nav-links li a {
+    text-decoration: none;
+    color: var(--white);
+    font-weight: bold;
+    transition: color 0.3s ease;
+    padding: 0;
+}
+.desktop-nav-links li a:hover {
+    color: var(--gold);
 }
 
-/* Hamburger Menu Button */
+/* Hamburger Menu Button (Default: hidden on large screens) */
 .hamburger-menu {
-    display: none; /* Hidden by default on large screens */
+    display: none; /* Hidden by default */
     background: none;
     border: none;
     cursor: pointer;
     padding: 10px;
     z-index: 1001;
-    flex-direction: column; /* To stack the bars */
-    justify-content: space-around; /* Space between bars */
-    width: 40px; /* Adjust size as needed */
+    flex-direction: column;
+    justify-content: space-around;
+    width: 40px;
     height: 40px;
 }
-
 .hamburger-menu .bar {
     display: block;
     width: 100%;
@@ -127,50 +99,27 @@ header span {
     transition: 0.4s;
     border-radius: 2px;
 }
-
 .hamburger-menu.active .bar:nth-child(1) {
     transform: translateY(8px) rotate(45deg);
 }
-
 .hamburger-menu.active .bar:nth-child(2) {
     opacity: 0;
 }
-
 .hamburger-menu.active .bar:nth-child(3) {
     transform: translateY(-8px) rotate(-45deg);
 }
 
-/* Navigation */
-nav {
-    /* Default for PC, overridden by media queries for mobile */
-    position: static; /* Flows normally on PC */
+/* Mobile Navigation Menu (Default: hidden on large screens) */
+.mobile-nav {
+    display: none; /* Hidden by default */
+    position: static; /* Placeholder, will be overridden for mobile */
     width: auto;
-    max-height: none; /* No max-height constraint on PC */
+    max-height: none;
     border-top: none;
     overflow: visible;
-    margin-left: auto; /* Pushes nav to the right on PC */
+    margin-left: auto;
 }
-
-nav ul.nav-links {
-    list-style: none;
-    display: flex; /* Displays horizontally on PC */
-    margin: 0;
-    padding: 0;
-    gap: 2rem; /* Space between nav items on PC */
-    align-items: center;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: var(--white);
-    font-weight: bold;
-    transition: color 0.3s ease;
-    padding: 0; /* No specific padding for PC links */
-}
-
-nav ul li a:hover {
-    color: var(--gold);
-}
+/* The .nav-links inside mobile-nav will have mobile specific styles */
 
 
 /* Hero Section */
@@ -351,27 +300,71 @@ section h3 {
     background-color: #b28e22;
     outline: none;
 }
-.ceo-info {
+
+/* --- Team Profiles Centralization --- */
+.team-profiles-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 2rem;
+    width: 100%;
+}
+.ceo-info,
+.manager-info {
+    flex: 1 1 300px;
+    max-width: 450px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
-    margin-top: 2rem;
     text-align: center;
+    background-color: var(--black);
+    border: 2px solid var(--gold);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 0;
 }
-.ceo-info p {
-    font-size: 1rem;
-    color: #f0f0f0;
-    line-height: 1.6;
+.ceo-info:hover,
+.manager-info:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
 }
-.circle-image {
+.team-role {
+    font-size: 0.9em;
+    color: #bbb;
+    margin-bottom: 1rem;
+}
+.ceo-info .circle-image,
+.manager-info .circle-image {
     width: 120px;
     height: 120px;
     object-fit: cover;
     border-radius: 50%;
     border: 3px solid var(--gold);
     box-shadow: 0 0 15px rgba(212, 175, 55, 0.7);
+    margin-bottom: 1rem;
 }
+.ceo-info button,
+.manager-info button {
+    background-color: var(--gold);
+    border: none;
+    padding: 0.75rem 2rem;
+    font-weight: 700;
+    color: var(--black);
+    font-size: 1rem;
+    border-radius: 60px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(212, 175, 55, 0.6);
+    transition: background-color 0.3s ease;
+}
+.ceo-info button:hover,
+.manager-info button:hover {
+    background-color: #b28e22;
+    outline: none;
+}
+
 /* Footer */
 footer {
     background-color: var(--black);
@@ -485,42 +478,36 @@ footer {
 @media (min-width: 769px) {
     header {
         padding: 1rem 4rem;
-        justify-content: flex-start; /* Ensure logo/text are at the start */
+        justify-content: space-between; /* Keep space-between for logo and menu */
+    }
+    .logo-text-wrapper {
+        gap: 10px; /* Standard gap for desktop */
     }
     header .Logo {
         height: 16vh;
         max-height: 100px;
-        padding-right: 1rem;
     }
     header span {
         font-size: 1.4rem;
         letter-spacing: 3px;
-        margin-left: 0;
-        margin-right: 0;
     }
+
+    /* Desktop menu visible */
+    .desktop-menu-container {
+        display: block;
+    }
+    .desktop-nav-links {
+        display: flex; /* Ensure horizontal layout */
+    }
+
+    /* Mobile elements hidden */
     .hamburger-menu {
-        display: none; /* Hide hamburger on PC */
+        display: none;
     }
-    nav {
-        margin-left: auto; /* Push navigation to the right */
-        position: static; /* Navigation flows normally */
-        max-height: none; /* No height constraint */
-        border-top: none;
-        overflow: visible;
+    .mobile-nav {
+        display: none;
     }
-    nav ul.nav-links {
-        gap: 2rem;
-        flex-direction: row; /* Horizontal layout */
-        align-items: center;
-        padding: 0;
-    }
-    nav ul li {
-        font-size: 1rem;
-    }
-    nav ul li a {
-        padding: 0;
-        border-bottom: none;
-    }
+
     .hero h2 {
         font-size: 3.4rem;
         letter-spacing: 4px;
@@ -561,7 +548,7 @@ footer {
         font-size: 1.1rem;
     }
     .service-desc {
-        font-size: 1rem;
+        font-size: 1.0rem; /* Consistency for desktop */
     }
     .contact form {
         max-width: 500px;
@@ -575,14 +562,6 @@ footer {
     }
     .contact button {
         padding: 0.85rem 2.5rem;
-        font-size: 1.1rem;
-    }
-    .ceo-info {
-        flex-direction: row;
-        text-align: left;
-        gap: 40px;
-    }
-    .ceo-info p {
         font-size: 1.1rem;
     }
     .circle-image {
@@ -613,6 +592,7 @@ footer {
         right: 0;
     }
 }
+
 /* --- Responsive Layout for Mobile / Smaller Screens (max-width: 768px) --- */
 @media (max-width: 768px) {
     header {
@@ -621,22 +601,31 @@ footer {
         align-items: center;
         padding: 1rem;
     }
+    .logo-text-wrapper {
+        gap: 5px; /* Smaller gap on mobile */
+    }
     header .Logo {
         height: 10vh;
         max-height: 70px;
-        padding-right: 0;
-        margin-bottom: 0;
     }
     header span {
         font-size: 1.1rem;
-        margin-bottom: 0;
-        margin-left: auto; /* Pushes RHOG STUDIO next to hamburger */
-        margin-right: 1rem;
+        margin-right: 1rem; /* Adjust margin to make space for hamburger */
     }
+
+    /* Desktop menu hidden */
+    .desktop-menu-container {
+        display: none;
+    }
+
+    /* Hamburger visible */
     .hamburger-menu {
         display: flex; /* Show hamburger on mobile */
     }
-    nav {
+
+    /* Mobile navigation styles */
+    .mobile-nav {
+        display: block; /* Ensure it can be targeted and sized */
         position: absolute;
         top: 100%; /* Position below the header */
         left: 0;
@@ -648,25 +637,29 @@ footer {
         transition: max-height 0.3s ease-in-out;
         z-index: 99;
     }
-    nav ul.nav-links {
-        flex-direction: column;
-        align-items: center;
+    .mobile-nav .nav-links {
+        list-style: none;
+        display: flex;
+        flex-direction: column; /* Stack vertically */
+        align-items: center; /* Center links */
         padding: 1rem 0;
+        margin: 0;
         gap: 0.5rem;
     }
-    nav ul.nav-links.active {
+    .mobile-nav .nav-links.active {
         max-height: 200px; /* Adjust as needed to fit all links when active */
     }
-    nav ul li a {
+    .mobile-nav .nav-links li a {
         padding: 0.5rem;
         display: block;
         width: 100%;
         text-align: center;
         border-bottom: 1px solid rgba(212, 175, 55, 0.2);
     }
-    nav ul li:last-child a {
+    .mobile-nav .nav-links li:last-child a {
         border-bottom: none;
     }
+
     .hero {
         height: 70vh;
         padding: 0 0.5rem;
@@ -703,7 +696,7 @@ footer {
     }
     .service-card {
         padding: 1rem;
-        max-width: 90%;
+        max-width: 90%; /* Adjusted for better mobile fill */
         flex-basis: auto;
     }
     .service-icon {
@@ -734,14 +727,21 @@ footer {
         padding: 0.6rem 1.8rem;
         font-size: 0.9rem;
     }
-    .ceo-info {
+    .team-profiles-wrapper {
         flex-direction: column;
         align-items: center;
-        text-align: center;
-        gap: 1rem;
-        padding: 0 0.5rem;
+        gap: 20px;
     }
-    .ceo-info p {
+    .ceo-info,
+    .manager-info {
+        max-width: 90%; /* Adjusted for better mobile fill */
+        width: 100%;
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+        padding: 1rem;
+    }
+    .ceo-info p,
+    .manager-info p {
         font-size: 0.9rem;
     }
     .circle-image {
