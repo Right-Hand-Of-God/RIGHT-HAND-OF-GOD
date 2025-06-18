@@ -4,49 +4,56 @@
     --black: #000000;
     --white: #ffffff;
 }
+
 /* Reset and base styles */
 * {
     box-sizing: border-box;
 }
+
 body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--black);
     color: var(--white);
     line-height: 1.6;
+    scroll-behavior: smooth;
 }
+
 a {
     color: var(--gold);
     text-decoration: none;
 }
+
 a:hover,
 a:focus {
     text-decoration: underline;
 }
+
 /* Header */
 header {
     background-color: var(--black);
     border-bottom: 3px solid var(--gold);
     padding: 1rem 2rem;
     display: flex;
-    justify-content: space-between; /* Pushes content to edges */
+    justify-content: space-between;
     align-items: center;
     position: sticky;
     top: 0;
     z-index: 100;
 }
 
-/* Logo and Text Wrapper */
 .logo-text-wrapper {
     display: flex;
     align-items: center;
     gap: 10px;
 }
+
 header .Logo {
     height: 12vh;
     max-height: 80px;
     width: auto;
 }
+
 header span {
     font-weight: 800;
     font-size: 1.2rem;
@@ -55,18 +62,19 @@ header span {
     white-space: nowrap;
 }
 
-/* Desktop Navigation Menu (Default: visible on large screens) */
 .desktop-menu-container {
-    display: block; /* Visible by default */
+    display: block;
 }
+
 .desktop-nav-links {
     list-style: none;
-    display: flex; /* Horizontal display for links */
+    display: flex;
     margin: 0;
     padding: 0;
-    gap: 2rem; /* Space between desktop nav items */
+    gap: 2rem;
     align-items: center;
 }
+
 .desktop-nav-links li a {
     text-decoration: none;
     color: var(--white);
@@ -74,13 +82,13 @@ header span {
     transition: color 0.3s ease;
     padding: 0;
 }
+
 .desktop-nav-links li a:hover {
     color: var(--gold);
 }
 
-/* Hamburger Menu Button (Default: hidden on large screens) */
 .hamburger-menu {
-    display: none; /* Hidden by default */
+    display: none;
     background: none;
     border: none;
     cursor: pointer;
@@ -91,6 +99,7 @@ header span {
     width: 40px;
     height: 40px;
 }
+
 .hamburger-menu .bar {
     display: block;
     width: 100%;
@@ -99,28 +108,28 @@ header span {
     transition: 0.4s;
     border-radius: 2px;
 }
+
 .hamburger-menu.active .bar:nth-child(1) {
     transform: translateY(8px) rotate(45deg);
 }
+
 .hamburger-menu.active .bar:nth-child(2) {
     opacity: 0;
 }
+
 .hamburger-menu.active .bar:nth-child(3) {
     transform: translateY(-8px) rotate(-45deg);
 }
 
-/* Mobile Navigation Menu (Default: hidden on large screens) */
 .mobile-nav {
-    display: none; /* Hidden by default */
-    position: static; /* Placeholder, will be overridden for mobile */
+    display: none;
+    position: static;
     width: auto;
     max-height: none;
     border-top: none;
     overflow: visible;
     margin-left: auto;
 }
-/* The .nav-links inside mobile-nav will have mobile specific styles */
-
 
 /* Hero Section */
 .hero {
@@ -136,6 +145,7 @@ header span {
     text-align: center;
     padding: 0 1rem;
 }
+
 .hero h2 {
     box-shadow: 5px 5px 10px rgb(0, 0, 0);
     font-size: 2.5rem;
@@ -147,12 +157,14 @@ header span {
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 8px;
 }
+
 .hero p {
     font-size: 1.2rem;
     max-width: 650px;
     font-weight: 500;
     padding: 0 1rem;
 }
+
 .hero button {
     margin-top: 1.5rem;
     background-color: var(--gold);
@@ -166,20 +178,24 @@ header span {
     box-shadow: 0 4px 10px rgba(212, 175, 55, 0.6);
     transition: background-color 0.3s ease;
 }
+
 .hero button:hover,
 .hero button:focus {
     background-color: #b28e22;
     outline: none;
 }
+
 /* Main Content */
 main {
     padding: 2rem 1rem;
     max-width: 1200px;
     margin: 0 auto;
 }
+
 section {
     margin-bottom: 3rem;
 }
+
 section h3 {
     font-size: 1.8rem;
     font-weight: 800;
@@ -191,6 +207,7 @@ section h3 {
     display: inline-block;
     padding-bottom: 0.3rem;
 }
+
 .about p {
     font-size: 1rem;
     max-width: 800px;
@@ -198,6 +215,7 @@ section h3 {
     color: #f0f0f0;
     line-height: 1.7;
 }
+
 /* Services Section */
 .services {
     display: flex;
@@ -205,6 +223,7 @@ section h3 {
     flex-wrap: wrap;
     justify-content: center;
 }
+
 .service-card {
     background-color: var(--black);
     border: 2px solid var(--gold);
@@ -216,22 +235,26 @@ section h3 {
     border-radius: 10px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 .service-card:hover,
 .service-card:focus-within {
     box-shadow: 0 0 25px rgba(212, 175, 55, 0.7);
     transform: translateY(-6px);
 }
+
 .service-icon {
     font-size: 3.5rem;
     margin-bottom: 0.8rem;
     color: var(--gold);
 }
+
 .service-title {
     font-weight: 700;
     font-size: 1.4rem;
     margin-bottom: 1.5rem;
     color: var(--gold);
 }
+
 .services button {
     background-color: var(--gold);
     border: none;
@@ -244,11 +267,13 @@ section h3 {
     box-shadow: 0 4px 10px rgba(212, 175, 55, 0.6);
     transition: background-color 0.3s ease;
 }
+
 .service-desc {
     font-size: 0.95rem;
     color: #f0f0f0;
     margin-top: 1rem;
 }
+
 /* Contact Section */
 .contact form {
     max-width: 450px;
@@ -259,12 +284,14 @@ section h3 {
     border-radius: 12px;
     box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
 }
+
 .contact label {
     display: block;
     margin-bottom: 0.3rem;
     font-weight: 600;
     color: var(--gold);
 }
+
 .contact input,
 .contact textarea {
     width: 100%;
@@ -278,11 +305,13 @@ section h3 {
     font-family: inherit;
     transition: border-color 0.3s ease;
 }
+
 .contact input:focus,
 .contact textarea:focus {
     border-color: #b28e22;
     outline: none;
 }
+
 .contact button {
     background-color: var(--gold);
     border: none;
@@ -295,13 +324,13 @@ section h3 {
     box-shadow: 0 4px 10px rgba(212, 175, 55, 0.6);
     transition: background-color 0.3s ease;
 }
+
 .contact button:hover,
 .contact button:focus {
     background-color: #b28e22;
     outline: none;
 }
 
-/* --- Team Profiles Centralization --- */
 .team-profiles-wrapper {
     display: flex;
     flex-wrap: wrap;
@@ -310,6 +339,7 @@ section h3 {
     margin-top: 2rem;
     width: 100%;
 }
+
 .ceo-info,
 .manager-info {
     flex: 1 1 300px;
@@ -326,16 +356,19 @@ section h3 {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     margin: 0;
 }
+
 .ceo-info:hover,
 .manager-info:hover {
     transform: translateY(-5px);
     box-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
 }
+
 .team-role {
     font-size: 0.9em;
     color: #bbb;
     margin-bottom: 1rem;
 }
+
 .ceo-info .circle-image,
 .manager-info .circle-image {
     width: 120px;
@@ -346,6 +379,7 @@ section h3 {
     box-shadow: 0 0 15px rgba(212, 175, 55, 0.7);
     margin-bottom: 1rem;
 }
+
 .ceo-info button,
 .manager-info button {
     background-color: var(--gold);
@@ -359,6 +393,7 @@ section h3 {
     box-shadow: 0 4px 10px rgba(212, 175, 55, 0.6);
     transition: background-color 0.3s ease;
 }
+
 .ceo-info button:hover,
 .manager-info button:hover {
     background-color: #b28e22;
@@ -374,14 +409,17 @@ footer {
     font-size: 0.85rem;
     border-top: 1px solid var(--gold);
 }
+
 /* Portfolio styles (assuming they will be used for portfolio pages) */
 .portfolio {
     max-width: 1000px;
     margin: 0 auto;
 }
+
 .portfolio-category {
     margin-bottom: 2rem;
 }
+
 .portfolio-category h4 {
     font-size: 1.6rem;
     color: var(--gold);
@@ -391,11 +429,13 @@ footer {
     padding-bottom: 0.3rem;
     text-transform: uppercase;
 }
+
 .portfolio-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 15px;
 }
+
 .portfolio-item {
     position: relative;
     cursor: pointer;
@@ -406,12 +446,14 @@ footer {
     background-color: var(--black);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 .portfolio-item:hover,
 .portfolio-item:focus {
     box-shadow: 0 0 25px rgba(212, 175, 55, 0.7);
     transform: translateY(-5px);
     outline: none;
 }
+
 .portfolio-img,
 .portfolio-video {
     display: block;
@@ -420,6 +462,7 @@ footer {
     object-fit: cover;
     border-radius: 8px 8px 0 0;
 }
+
 .portfolio-title {
     padding: 0.6rem 0.8rem;
     color: var(--gold);
@@ -427,6 +470,7 @@ footer {
     font-size: 1rem;
     text-align: center;
 }
+
 /* Lightbox */
 #lightbox-overlay {
     position: fixed;
@@ -440,15 +484,18 @@ footer {
     transition: opacity 0.3s ease;
     z-index: 1000;
 }
+
 #lightbox-overlay.active {
     visibility: visible;
     opacity: 1;
 }
+
 #lightbox-content {
     max-width: 95vw;
     max-height: 95vh;
     position: relative;
 }
+
 #lightbox-content img,
 #lightbox-content video {
     max-width: 100%;
@@ -457,6 +504,7 @@ footer {
     box-shadow: 0 0 30px rgba(212, 175, 55, 0.9);
     display: block;
 }
+
 #lightbox-close {
     position: absolute;
     top: 5px;
@@ -470,18 +518,19 @@ footer {
     border: none;
     padding: 0.5rem;
 }
+
 #lightbox-close:hover {
     color: #b28e22;
 }
 
-/* --- Responsive Layout for PC / Larger Screens (min-width: 769px) --- */
+/* Responsive Layout for PC / Larger Screens (min-width: 769px) */
 @media (min-width: 769px) {
     header {
         padding: 1rem 4rem;
-        justify-content: space-between; /* Keep space-between for logo and menu */
+        justify-content: space-between;
     }
     .logo-text-wrapper {
-        gap: 10px; /* Standard gap for desktop */
+        gap: 10px;
     }
     header .Logo {
         height: 16vh;
@@ -492,15 +541,13 @@ footer {
         letter-spacing: 3px;
     }
 
-    /* Desktop menu visible */
     .desktop-menu-container {
         display: block;
     }
     .desktop-nav-links {
-        display: flex; /* Ensure horizontal layout */
+        display: flex;
     }
 
-    /* Mobile elements hidden */
     .hamburger-menu {
         display: none;
     }
@@ -548,7 +595,7 @@ footer {
         font-size: 1.1rem;
     }
     .service-desc {
-        font-size: 1.0rem; /* Consistency for desktop */
+        font-size: 1.0rem;
     }
     .contact form {
         max-width: 500px;
@@ -593,7 +640,7 @@ footer {
     }
 }
 
-/* --- Responsive Layout for Mobile / Smaller Screens (max-width: 768px) --- */
+/* Responsive Layout for Mobile / Smaller Screens (max-width: 768px) */
 @media (max-width: 768px) {
     header {
         flex-direction: row;
@@ -602,7 +649,7 @@ footer {
         padding: 1rem;
     }
     .logo-text-wrapper {
-        gap: 5px; /* Smaller gap on mobile */
+        gap: 5px;
     }
     header .Logo {
         height: 10vh;
@@ -610,44 +657,41 @@ footer {
     }
     header span {
         font-size: 1.1rem;
-        margin-right: 1rem; /* Adjust margin to make space for hamburger */
+        margin-right: 1rem;
     }
 
-    /* Desktop menu hidden */
     .desktop-menu-container {
         display: none;
     }
 
-    /* Hamburger visible */
     .hamburger-menu {
-        display: flex; /* Show hamburger on mobile */
+        display: flex;
     }
 
-    /* Mobile navigation styles */
     .mobile-nav {
-        display: block; /* Ensure it can be targeted and sized */
+        display: block;
         position: absolute;
-        top: 100%; /* Position below the header */
+        top: 100%;
         left: 0;
         width: 100%;
         background-color: var(--black);
         border-top: 1px solid var(--gold);
         overflow: hidden;
-        max-height: 0; /* Hidden by default for dropdown */
+        max-height: 0;
         transition: max-height 0.3s ease-in-out;
         z-index: 99;
     }
     .mobile-nav .nav-links {
         list-style: none;
         display: flex;
-        flex-direction: column; /* Stack vertically */
-        align-items: center; /* Center links */
+        flex-direction: column;
+        align-items: center;
         padding: 1rem 0;
         margin: 0;
         gap: 0.5rem;
     }
     .mobile-nav .nav-links.active {
-        max-height: 200px; /* Adjust as needed to fit all links when active */
+        max-height: 200px;
     }
     .mobile-nav .nav-links li a {
         padding: 0.5rem;
@@ -696,7 +740,7 @@ footer {
     }
     .service-card {
         padding: 1rem;
-        max-width: 90%; /* Adjusted for better mobile fill */
+        max-width: 90%;
         flex-basis: auto;
     }
     .service-icon {
@@ -734,7 +778,7 @@ footer {
     }
     .ceo-info,
     .manager-info {
-        max-width: 90%; /* Adjusted for better mobile fill */
+        max-width: 90%;
         width: 100%;
         margin-left: 0.5rem;
         margin-right: 0.5rem;
@@ -776,6 +820,7 @@ footer {
         font-size: 1.8rem;
     }
 }
+
 /* Styles for custom message box, loading spinner, and lightbox overlays */
 #message-box-overlay, #loading-spinner, #lightbox-overlay {
     position: fixed;
@@ -813,7 +858,7 @@ footer {
 }
 
 #message-box-text.error {
-    color: #d9534f; /* Red for errors */
+    color: #d9534f;
 }
 
 #message-box-ok {
@@ -843,4 +888,196 @@ footer {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+/* Global Basic Styles */
+body {
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+/* Our Team Section Styling */
+.our-team-section {
+    padding: 80px 20px;
+    background-color: #0d0d0d;
+    text-align: center;
+    color: #fff;
+    overflow: hidden;
+    position: relative;
+}
+
+.our-team-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle at center, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+    opacity: 0.1;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.our-team-section h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5em;
+    color: #d4af37;
+    margin-bottom: 60px;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.our-team-section h3::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background-color: #d4af37;
+    margin: 15px auto 0;
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+.team-members-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+    position: relative;
+    z-index: 1;
+}
+
+.team-member-card {
+    background-color: #1a1a1a;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.08);
+    padding: 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.4s ease-out;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.team-member-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 3px solid transparent;
+    border-radius: 15px;
+    transition: border-color 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.team-member-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 15px 40px rgba(255, 255, 255, 0.2);
+    background-color: #222;
+}
+
+.team-member-card:hover::before {
+    border-color: #d4af37;
+}
+
+.team-member-img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 6px solid #d4af37;
+    margin-bottom: 30px;
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+    transition: border-color 0.4s ease, transform 0.4s ease, box-shadow 0.5s ease-out;
+    filter: grayscale(100%);
+}
+
+.team-member-card:hover .team-member-img {
+    transform: scale(1.08);
+    box-shadow: 0 0 0 8px rgba(212, 175, 55, 0.6), 0 0 20px rgba(212, 175, 55, 0.8);
+    filter: grayscale(0%);
+}
+
+.team-member-name {
+    font-size: 2em;
+    color: #d4af37;
+    margin-bottom: 10px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
+}
+
+.team-member-office {
+    font-size: 1.3em;
+    color: #f0f0f0;
+    font-weight: 600;
+    margin-bottom: 20px;
+    letter-spacing: 0.2px;
+}
+
+.team-desc {
+    font-size: 1.05em;
+    color: #c0c0c0;
+    line-height: 1.8;
+}
+
+.explore-team-section {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #000000;
+}
+
+.explore-team-section button {
+    background-color: var(--gold);
+    color: #000000;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.1em;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.explore-team-section button:hover {
+    background-color: goldenrod;
+}
+
+.explore-team-section button a {
+    color: inherit;
+    text-decoration: none;
+}
+
+@media (max-width: 768px) {
+    .explore-team-section button {
+        width: 80%;
+        padding: 14px 25px;
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .explore-team-section button {
+        width: 90%;
+        padding: 12px 20px;
+        font-size: 0.95em;
+    }
 }

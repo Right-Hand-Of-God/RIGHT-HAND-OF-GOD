@@ -1,11 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Hamburger menu functionality
     const hamburgerMenu = document.querySelector('.hamburger-menu');
-    // Target the specific mobile navigation UL within the .mobile-nav container
-    const navLinks = document.querySelector('.mobile-nav .nav-links'); 
+    const navLinks = document.querySelector('.nav-links');
 
     hamburgerMenu.addEventListener('click', function () {
-        // Toggle the 'active' class to show/hide the mobile navigation links
+        // Toggle the 'active' class to show/hide the navigation links
         navLinks.classList.toggle('active');
         // Also toggle 'active' class on hamburger menu for the CSS animation (e.g., turning into an 'X')
         hamburgerMenu.classList.toggle('active');
@@ -14,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Close the mobile menu when a navigation link is clicked
-    document.querySelectorAll('.mobile-nav .nav-links a').forEach(link => { // Ensure correct targeting
+    document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', () => {
             navLinks.classList.remove('active');
             hamburgerMenu.classList.remove('active'); // Remove active class from hamburger too
