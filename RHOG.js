@@ -184,3 +184,4 @@ document.querySelectorAll('.portfolio-item').forEach(item => {
          alert('Failed to send message. Please try again.\n' + JSON.stringify(error));
       });
 });
+});
