@@ -46,20 +46,6 @@ document.addEventListener('DOMContentLoaded', function () {
         messageBoxOkBtn.focus(); // Focus on OK button for accessibility
     }
 
- 
-  document.getElementById('contact-form').addEventListener('submit', function(event) {
-    event.preventDefault();
- (function() {
-    emailjs.init("lHLaPI0sQ2Zt_Fy0Y"); // Replace with your EmailJS public key
-  })();
-    emailjs.sendForm('service_5rqt66q', 'template_0ssg2db', this)
-      .then(function(response) {
-         alert('Message sent successfully!');
-         document.getElementById('contact-form').reset();
-      }, function(error) {
-         alert('Failed to send message. Please try again.\n' + JSON.stringify(error));
-      });
-
     /**
      * Hides the custom message box.
      */
@@ -185,5 +171,16 @@ document.querySelectorAll('.portfolio-item').forEach(item => {
             openLightbox(item.dataset.type, item.dataset.src);
         }
     });
-    });
+  document.getElementById('contact-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+ (function() {
+    emailjs.init("lHLaPI0sQ2Zt_Fy0Y"); // Replace with your EmailJS public key
+  })();
+    emailjs.sendForm('service_5rqt66q', 'template_0ssg2db', this)
+      .then(function(response) {
+         alert('Message sent successfully!');
+         document.getElementById('contact-form').reset();
+      }, function(error) {
+         alert('Failed to send message. Please try again.\n' + JSON.stringify(error));
+      });
 });
