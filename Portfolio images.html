@@ -1,163 +1,233 @@
 <!DOCTYPE html>
- <html lang="en">
- <head>
+<html lang="en">
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RHOG STUDIO - Graphic Design & Large Printing</title>
+  <title>RHOG STUDIO – Graphic Design & Large Printing</title>
   <link rel="icon" href="RHOG LOGO.png" type="image/png">
+  <!-- Preconnect to critical origins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Optimized font loading: only load 'Inter' with 400,600,700 weights -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <!-- Tailwind via CDN (lightweight, but we also add custom critical CSS) -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Minimal critical styles inlined to avoid render blocking -->
   <style>
-  /* Optional: Custom font for a clean look */
-  body {
-  font-family: 'Inter', sans-serif;
-  }
- 
-
-  /* Styles for the modal backdrop */
-  .modal-backdrop {
-  background-color: rgba(0, 0, 0, 0.85); /* Darker, slightly transparent background */
-  z-index: 1000; /* Ensure it's on top */
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: none; /* Hidden by default */
-  justify-content: center;
-  align-items: center;
-  }
- 
-
-  /* Styles for the modal content container */
-  .modal-content {
-  max-width: 90vw;
-  max-height: 90vh;
-  width: auto;
-  height: auto;
-  overflow: hidden; /* Hide overflow from media */
-  background-color: #1a1a1a; /* Dark background for modal */
-  border-radius: 1rem; /* Rounded corners */
-  position: relative; /* For positioning the close button */
-  }
- 
-
-  /* Styles for media inside the modal */
-  .modal-content img,
-  .modal-content video {
-  display: block;
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain; /* Ensure entire image/video is visible */
-  border-radius: 0.75rem; /* Match modal corners partially */
-  }
- 
-
-  /* Style for the close button */
-  .modal-close-btn {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  color: white;
-  font-size: 2rem;
-  cursor: pointer;
-  z-index: 1010; /* Ensure it's on top of the modal content */
-  }
+    /* Critical styles for above-the-fold content */
+    body { font-family: 'Inter', sans-serif; background: #000; color: #fff; margin: 0; }
+    .modal-backdrop {
+      background-color: rgba(0, 0, 0, 0.85);
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .modal-content {
+      max-width: 90vw; max-height: 90vh;
+      background: #1a1a1a;
+      border-radius: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .modal-content img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 0.75rem; }
+    .modal-close-btn {
+      position: absolute; top: 1rem; right: 1rem;
+      color: white; font-size: 2rem; cursor: pointer; z-index: 1010;
+      line-height: 1; background: rgba(0,0,0,0.4); width: 2.5rem; height: 2.5rem;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .modal-close-btn:hover { background: rgba(255,255,255,0.2); }
+    /* Lazy load blur-up effect (minimal) */
+    .portfolio-img { transition: opacity 0.2s ease; background: #2a2a2a; }
+    .portfolio-img[lazy=loading] { opacity: 0.3; }
+    .portfolio-img[lazy=loaded] { opacity: 1; }
+    /* Keep header & grid spacing tight */
+    .container { max-width: 1280px; margin-left: auto; margin-right: auto; }
+    .rounded-b-lg { border-bottom-left-radius: 0.5rem; border-bottom-right-radius: 0.5rem; }
   </style>
- </head>
- <body class="bg-black text-white">
-  <header class="bg-gray-900 shadow-md p-4 rounded-b-lg mb-8">
-  <div class="container mx-auto flex justify-between items-center px-4">
-  <h1 class="text-3xl font-bold text-amber-400">RHOG STUDIO</h1>
-  </div>
-  </header>
- 
+  <!-- Defer non-critical JS and load it after paint -->
+  <script defer>
+    (function() {
+      // Lazy image observer - load images only when they enter viewport
+      if ('IntersectionObserver' in window) {
+        const images = document.querySelectorAll('.portfolio-img');
+        const imageObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const img = entry.target;
+              const src = img.getAttribute('data-src');
+              if (src && img.src !== src) {
+                img.src = src;
+                img.setAttribute('lazy', 'loading');
+                img.onload = () => {
+                  img.setAttribute('lazy', 'loaded');
+                  img.removeAttribute('data-src');
+                };
+                img.onerror = () => {
+                  img.setAttribute('lazy', 'loaded');
+                  img.removeAttribute('data-src');
+                };
+              }
+              imageObserver.unobserve(img);
+            }
+          });
+        }, { rootMargin: '100px' });
+        images.forEach(img => imageObserver.observe(img));
+      } else {
+        // Fallback: load all images immediately
+        document.querySelectorAll('.portfolio-img').forEach(img => {
+          const src = img.getAttribute('data-src');
+          if (src) { img.src = src; img.removeAttribute('data-src'); }
+        });
+      }
 
-  <section class="py-8 px-4">
-  <div class="container mx-auto">
-  <div class="portfolio-category mb-12" id="pictures">
-  <h2 class="text-4xl font-extrabold text-center text-amber-400 mb-8">Our Creative Portfolio</h2>
-  <h4 class="text-2xl font-semibold text-center text-white mb-6">Pictures</h4>
-  <div class="portfolio-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-  <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer"
-  tabindex="0" role="button" aria-pressed="false" data-type="image" data-src="RHOG BRAND ,,.jpg"
-  aria-label="View picture Project 1: RHOG BRAND ,,.jpg">
-  <img src="RHOG BRAND ,,.jpg" alt="BRAND" class="portfolio-img w-full h-48 object-cover rounded-t-xl" />
-  <div class="portfolio-title p-4 text-center text-lg font-medium text-white">BRAND</div>
-  </div>
-  <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer"
-  tabindex="0" role="button" aria-pressed="false" data-type="image" data-src="img (1).jpg"
-  aria-label="View picture Project 2: Urban Poster">
-  <img src="img (1).jpg" alt="SAHPS WEEK" class="portfolio-img w-full h-48 object-cover rounded-t-xl" />
-  <div class="portfolio-title p-4 text-center text-lg font-medium text-white">SAHPS WEEK</div>
-  </div>
-  <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer"
-  tabindex="0" role="button" aria-pressed="false" data-type="image" data-src="img (2).jpg"
-  aria-label="View picture Project 3: Colorful Shapes">
-  <img src="img (2).jpg" alt="BIRTHDAY DESIGN" class="portfolio-img w-full h-48 object-cover rounded-t-xl" />
-  <div class="portfolio-title p-4 text-center text-lg font-medium text-white">BIRTHDAY</div>
-  </div>
-  <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer"
-  tabindex="0" role="button" aria-pressed="false" data-type="image" data-src="img (6).jpg"
-  aria-label="View picture Project 4: Modern Typography">
-  <img src="img (6).jpg" alt="BANNER DESIGN" class="portfolio-img w-full h-48 object-cover rounded-t-xl" />
-  <div class="portfolio-title p-4 text-center text-lg font-medium text-white">BANNER DESIGN</div>
-  </div>
-  <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer"
-  tabindex="0" role="button" aria-pressed="false" data-type="image" data-src="land POSSESSING AN EXCELLENT SPIRIT.jpg"
-  aria-label="View picture Project 5: Flyer Design">
-  <img src="land POSSESSING AN EXCELLENT SPIRIT.jpg" alt="FLYER" class="portfolio-img w-full h-48 object-cover rounded-t-xl" />
-  <div class="portfolio-title p-4 text-center text-lg font-medium text-white">FLYER</div>
-  </div>
-  <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer"
-  tabindex="0" role="button" aria-pressed="false" data-type="image" data-src="EBOMUCHE BURIAL.jpg"
-  aria-label="View picture Project 6: Book Cover">
-  <img src="EBOMUCHE BURIAL.jpg" alt="BOOK COVER" class="portfolio-img w-full h-48 object-cover rounded-t-xl" />
-  <div class="portfolio-title p-4 text-center text-lg font-medium text-white">BOOK COVER</div>
-  </div>
-  <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer"
-  tabindex="0" role="button" aria-pressed="false" data-type="image" data-src=""
-  aria-label="View picture Project 7: Another Book Cover">
-  <img src="img (5).jpg" alt="BOOK COVER" class="portfolio-img w-full h-48 object-cover rounded-t-xl" />
-  <div class="portfolio-title p-4 text-center text-lg font-medium text-white">Concert Flyer</div>
-  </div>
-  </div>
-  <section class="py-8 px-4">
-  <div class="container mx-auto text-center">
-  <a href="https://www.behance.net/gallery/227292143/FLYERS" target="_blank" rel="noopener noreferrer"
-  class="inline-block bg-amber-500 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-amber-600 hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1">
-  View More
-  </a>
-  </div>
-  </section>
-  </div>
-  </div>
- 
+      // Modal logic with event delegation for fast binding
+      const modal = document.getElementById('imageModal');
+      const modalImage = document.getElementById('modalImage');
+      const closeBtn = document.querySelector('.modal-close-btn');
 
-  <div id="imageModal" class="modal-backdrop">
-  <span class="modal-close-btn" onclick="closeModal()">&times;</span>
-  <div class="modal-content">
-  <img id="modalImage" src="" alt="Full Size Image">
-  </div>
-  </div>
- 
+      function openModal(src) {
+        if (!src || src.trim() === '') return;
+        modalImage.src = src;
+        modal.style.display = 'flex';
+      }
 
-  <script>
-  const portfolioItems = document.querySelectorAll('.portfolio-item');
-  const modal = document.getElementById('imageModal');
-  const modalImage = document.getElementById('modalImage');
- 
+      function closeModal() {
+        modal.style.display = 'none';
+        // clear src to free memory
+        setTimeout(() => { if (modal.style.display === 'none') modalImage.src = ''; }, 100);
+      }
 
-  portfolioItems.forEach(item => {
-  item.addEventListener('click', () => {
-  modalImage.src = item.getAttribute('data-src');
-  modal.style.display = 'flex'; // Show the modal
-  });
-  });
- 
+      // Use event delegation on portfolio grid
+      const grid = document.querySelector('.portfolio-grid');
+      if (grid) {
+        grid.addEventListener('click', (e) => {
+          const item = e.target.closest('.portfolio-item');
+          if (item) {
+            const src = item.getAttribute('data-src');
+            if (src && src.trim() !== '') {
+              openModal(src);
+            } else {
+              // fallback: try to get from image data-src or src
+              const img = item.querySelector('.portfolio-img');
+              if (img) {
+                const imgSrc = img.getAttribute('data-src') || img.src;
+                if (imgSrc && imgSrc.trim() !== '') openModal(imgSrc);
+              }
+            }
+          }
+        });
+        // Keyboard accessibility
+        grid.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            const item = e.target.closest('.portfolio-item');
+            if (item) {
+              e.preventDefault();
+              const src = item.getAttribute('data-src');
+              if (src && src.trim() !== '') openModal(src);
+            }
+          }
+        });
+      }
 
-  function closeModal() {
-  modal.style.display = 'none'; // Hide the modal
-  }
+      // Close modal on backdrop click, escape key
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
+      });
+      if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+      // Expose closeModal globally for inline onclick (legacy support)
+      window.closeModal = closeModal;
+    })();
   </script>
- </body>
- </html>
+</head>
+<body>
+  <header class="bg-gray-900 shadow-md p-4 rounded-b-lg mb-6">
+    <div class="container mx-auto flex justify-between items-center px-4">
+      <h1 class="text-3xl font-bold text-amber-400">RHOG STUDIO</h1>
+      <!-- Optional small tagline for extra context, no render-blocking -->
+      <span class="text-sm text-gray-400 hidden sm:inline">Design · Print · Impact</span>
+    </div>
+  </header>
+
+  <section class="py-6 px-4">
+    <div class="container mx-auto">
+      <div class="portfolio-category mb-10" id="pictures">
+        <h2 class="text-4xl font-extrabold text-center text-amber-400 mb-2">Our Creative Portfolio</h2>
+        <h4 class="text-2xl font-semibold text-center text-white mb-6">Pictures</h4>
+        <div class="portfolio-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+          <!-- Each item uses data-src for lazy loading. Low-quality placeholder inline? We use a tiny data:image placeholder to avoid 404 -->
+          <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-200 overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400"
+               tabindex="0" role="button" aria-pressed="false" data-type="image" data-src="RHOG BRAND ,,.jpg"
+               aria-label="View picture BRAND">
+            <img class="portfolio-img w-full h-48 object-cover rounded-t-xl" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%232a2a2a'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23666' font-family='Inter' font-size='20'%3ELoading...%3C/text%3E%3C/svg%3E" data-src="RHOG BRAND ,,.jpg" alt="BRAND" loading="lazy" />
+            <div class="portfolio-title p-3 text-center text-lg font-medium text-white">BRAND</div>
+          </div>
+          <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-200 overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400"
+               tabindex="0" role="button" aria-pressed="false" data-type="image" data-src="img (1).jpg"
+               aria-label="View picture SAHPS WEEK">
+            <img class="portfolio-img w-full h-48 object-cover rounded-t-xl" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%232a2a2a'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23666' font-family='Inter' font-size='20'%3ELoading...%3C/text%3E%3C/svg%3E" data-src="img (1).jpg" alt="SAHPS WEEK" loading="lazy" />
+            <div class="portfolio-title p-3 text-center text-lg font-medium text-white">SAHPS WEEK</div>
+          </div>
+          <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-200 overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400"
+               tabindex="0" role="button" aria-pressed="false" data-type="image" data-src="img (2).jpg"
+               aria-label="View picture BIRTHDAY">
+            <img class="portfolio-img w-full h-48 object-cover rounded-t-xl" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%232a2a2a'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23666' font-family='Inter' font-size='20'%3ELoading...%3C/text%3E%3C/svg%3E" data-src="img (2).jpg" alt="BIRTHDAY DESIGN" loading="lazy" />
+            <div class="portfolio-title p-3 text-center text-lg font-medium text-white">BIRTHDAY</div>
+          </div>
+          <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-200 overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400"
+               tabindex="0" role="button" aria-pressed="false" data-type="image" data-src="img (6).jpg"
+               aria-label="View picture BANNER DESIGN">
+            <img class="portfolio-img w-full h-48 object-cover rounded-t-xl" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%232a2a2a'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23666' font-family='Inter' font-size='20'%3ELoading...%3C/text%3E%3C/svg%3E" data-src="img (6).jpg" alt="BANNER DESIGN" loading="lazy" />
+            <div class="portfolio-title p-3 text-center text-lg font-medium text-white">BANNER</div>
+          </div>
+          <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-200 overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400"
+               tabindex="0" role="button" aria-pressed="false" data-type="image" data-src="land POSSESSING AN EXCELLENT SPIRIT.jpg"
+               aria-label="View picture FLYER">
+            <img class="portfolio-img w-full h-48 object-cover rounded-t-xl" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%232a2a2a'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23666' font-family='Inter' font-size='20'%3ELoading...%3C/text%3E%3C/svg%3E" data-src="land POSSESSING AN EXCELLENT SPIRIT.jpg" alt="FLYER" loading="lazy" />
+            <div class="portfolio-title p-3 text-center text-lg font-medium text-white">FLYER</div>
+          </div>
+          <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-200 overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400"
+               tabindex="0" role="button" aria-pressed="false" data-type="image" data-src="EBOMUCHE BURIAL.jpg"
+               aria-label="View picture BOOK COVER">
+            <img class="portfolio-img w-full h-48 object-cover rounded-t-xl" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%232a2a2a'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23666' font-family='Inter' font-size='20'%3ELoading...%3C/text%3E%3C/svg%3E" data-src="EBOMUCHE BURIAL.jpg" alt="BOOK COVER" loading="lazy" />
+            <div class="portfolio-title p-3 text-center text-lg font-medium text-white">BOOK COVER</div>
+          </div>
+          <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-200 overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400"
+               tabindex="0" role="button" aria-pressed="false" data-type="image" data-src="img (5).jpg"
+               aria-label="View picture Concert Flyer">
+            <img class="portfolio-img w-full h-48 object-cover rounded-t-xl" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%232a2a2a'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23666' font-family='Inter' font-size='20'%3ELoading...%3C/text%3E%3C/svg%3E" data-src="img (5).jpg" alt="Concert Flyer" loading="lazy" />
+            <div class="portfolio-title p-3 text-center text-lg font-medium text-white">Concert Flyer</div>
+          </div>
+          <!-- Add an extra placeholder to fill grid nicely – but we keep 7 items as original -->
+        </div>
+
+        <!-- View More CTA -->
+        <div class="text-center mt-8">
+          <a href="https://www.behance.net/gallery/227292143/FLYERS" target="_blank" rel="noopener noreferrer"
+             class="inline-block bg-amber-500 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-amber-600 hover:shadow-xl transition duration-200 ease-in-out transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-amber-400">
+            View More
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <div id="imageModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-label="Full size image viewer">
+    <span class="modal-close-btn" aria-label="Close modal">&times;</span>
+    <div class="modal-content">
+      <img id="modalImage" src="" alt="Full size image" />
+    </div>
+  </div>
+
+  <!-- Small footprint: no extra render-blocking scripts -->
+</body>
+</html>
