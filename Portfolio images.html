@@ -8,51 +8,141 @@
   <!-- Preconnect to critical origins -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Optimized font loading: only load 'Inter' with 400,600,700 weights -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
-  <!-- Tailwind via CDN (lightweight, but we also add custom critical CSS) -->
+  <!-- Optimized font: Inter with weights 400,600,700 & display swap -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <!-- Tailwind via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Minimal critical styles inlined to avoid render blocking -->
   <style>
-    /* Critical styles for above-the-fold content */
-    body { font-family: 'Inter', sans-serif; background: #000; color: #fff; margin: 0; }
-    .modal-backdrop {
-      background-color: rgba(0, 0, 0, 0.85);
+    /* base & custom elegance */
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0b0b0b;
+      color: #f0f0f0;
+    }
+    /* subtle grain texture overlay for depth (very light) */
+    body::before {
+      content: '';
       position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+    .container { position: relative; z-index: 1; }
+    /* Glass-morphism header */
+    .glass-header {
+      background: rgba(20, 20, 20, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 215, 0, 0.15);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+    .glow-text {
+      text-shadow: 0 0 30px rgba(255, 215, 0, 0.15);
+    }
+    /* Portfolio card refinement */
+    .portfolio-item {
+      background: rgba(26, 26, 26, 0.8);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 215, 0, 0.06);
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transform: translateY(0);
+      border-radius: 1.25rem;
+      overflow: hidden;
+      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.6);
+    }
+    .portfolio-item:hover {
+      transform: translateY(-8px) scale(1.01);
+      border-color: rgba(255, 215, 0, 0.25);
+      box-shadow: 0 20px 40px -12px rgba(255, 215, 0, 0.15);
+    }
+    .portfolio-item .portfolio-img {
+      transition: transform 0.6s ease, filter 0.4s ease;
+      filter: saturate(0.9) brightness(0.95);
+      background: #1e1e1e;
+    }
+    .portfolio-item:hover .portfolio-img {
+      transform: scale(1.04);
+      filter: saturate(1.1) brightness(1.02);
+    }
+    .portfolio-title {
+      background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.6) 100%);
+      padding: 1rem 0.75rem 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      border-top: 1px solid rgba(255,215,0,0.08);
+    }
+    /* Modal improvements */
+    .modal-backdrop {
+      background: rgba(0, 0, 0, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
     }
     .modal-content {
-      max-width: 90vw; max-height: 90vh;
-      background: #1a1a1a;
-      border-radius: 1rem;
-      position: relative;
+      background: #121212;
+      border-radius: 1.5rem;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,215,0,0.1);
       overflow: hidden;
     }
-    .modal-content img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 0.75rem; }
     .modal-close-btn {
-      position: absolute; top: 1rem; right: 1rem;
-      color: white; font-size: 2rem; cursor: pointer; z-index: 1010;
-      line-height: 1; background: rgba(0,0,0,0.4); width: 2.5rem; height: 2.5rem;
-      border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.2s;
     }
-    .modal-close-btn:hover { background: rgba(255,255,255,0.2); }
-    /* Lazy load blur-up effect (minimal) */
-    .portfolio-img { transition: opacity 0.2s ease; background: #2a2a2a; }
-    .portfolio-img[lazy=loading] { opacity: 0.3; }
+    .modal-close-btn:hover {
+      background: rgba(255,215,0,0.2);
+      transform: rotate(90deg);
+    }
+    /* CTA button with shimmer */
+    .cta-btn {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 20px -6px rgba(255, 215, 0, 0.25);
+      letter-spacing: 0.03em;
+    }
+    .cta-btn::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(60deg, transparent, rgba(255,255,255,0.1), transparent);
+      transform: rotate(25deg);
+      transition: all 0.6s;
+    }
+    .cta-btn:hover::after {
+      left: 100%;
+    }
+    .cta-btn:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 12px 28px -8px rgba(255, 215, 0, 0.4);
+    }
+    /* Section headings */
+    .section-heading {
+      background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 40px rgba(251, 191, 36, 0.1);
+    }
+    .sub-heading {
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: #a0a0a0;
+    }
+    /* lazy load blur */
+    .portfolio-img[lazy=loading] { opacity: 0.4; transform: scale(0.98); }
     .portfolio-img[lazy=loaded] { opacity: 1; }
-    /* Keep header & grid spacing tight */
-    .container { max-width: 1280px; margin-left: auto; margin-right: auto; }
-    .rounded-b-lg { border-bottom-left-radius: 0.5rem; border-bottom-right-radius: 0.5rem; }
   </style>
-  <!-- Defer non-critical JS and load it after paint -->
+  <!-- Defer JS for non-blocking -->
   <script defer>
     (function() {
-      // Lazy image observer - load images only when they enter viewport
+      // Lazy image observer with better placeholder
       if ('IntersectionObserver' in window) {
         const images = document.querySelectorAll('.portfolio-img');
         const imageObserver = new IntersectionObserver((entries) => {
@@ -75,17 +165,16 @@
               imageObserver.unobserve(img);
             }
           });
-        }, { rootMargin: '100px' });
+        }, { rootMargin: '120px' });
         images.forEach(img => imageObserver.observe(img));
       } else {
-        // Fallback: load all images immediately
         document.querySelectorAll('.portfolio-img').forEach(img => {
           const src = img.getAttribute('data-src');
           if (src) { img.src = src; img.removeAttribute('data-src'); }
         });
       }
 
-      // Modal logic with event delegation for fast binding
+      // Modal logic
       const modal = document.getElementById('imageModal');
       const modalImage = document.getElementById('modalImage');
       const closeBtn = document.querySelector('.modal-close-btn');
@@ -94,39 +183,29 @@
         if (!src || src.trim() === '') return;
         modalImage.src = src;
         modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
       }
 
       function closeModal() {
         modal.style.display = 'none';
-        // clear src to free memory
-        setTimeout(() => { if (modal.style.display === 'none') modalImage.src = ''; }, 100);
+        document.body.style.overflow = '';
+        setTimeout(() => { if (modal.style.display === 'none') modalImage.src = ''; }, 120);
       }
 
-      // Use event delegation on portfolio grid
+      // Event delegation on grid
       const grid = document.querySelector('.portfolio-grid');
       if (grid) {
         grid.addEventListener('click', (e) => {
           const item = e.target.closest('.portfolio-item');
           if (item) {
             const src = item.getAttribute('data-src');
-            if (src && src.trim() !== '') {
-              openModal(src);
-            } else {
-              // fallback: try to get from image data-src or src
-              const img = item.querySelector('.portfolio-img');
-              if (img) {
-                const imgSrc = img.getAttribute('data-src') || img.src;
-                if (imgSrc && imgSrc.trim() !== '') openModal(imgSrc);
-              }
-            }
+            if (src && src.trim() !== '') openModal(src);
           }
         });
-        // Keyboard accessibility
         grid.addEventListener('keydown', (e) => {
           if (e.key === 'Enter' || e.key === ' ') {
             const item = e.target.closest('.portfolio-item');
-            if (item) {
-              e.preventDefault();
+            if (item) { e.preventDefault(); 
               const src = item.getAttribute('data-src');
               if (src && src.trim() !== '') openModal(src);
             }
@@ -134,86 +213,115 @@
         });
       }
 
-      // Close modal on backdrop click, escape key
-      modal.addEventListener('click', (e) => {
-        if (e.target === modal) closeModal();
-      });
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
-      });
+      modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.style.display === 'flex') closeModal(); });
       if (closeBtn) closeBtn.addEventListener('click', closeModal);
-
-      // Expose closeModal globally for inline onclick (legacy support)
       window.closeModal = closeModal;
     })();
   </script>
 </head>
 <body>
-  <header class="bg-gray-900 shadow-md p-4 rounded-b-lg mb-6">
+  <!-- Header with glass effect -->
+  <header class="glass-header sticky top-0 z-50 p-4 rounded-b-2xl mb-8">
     <div class="container mx-auto flex justify-between items-center px-4">
-      <h1 class="text-3xl font-bold text-amber-400">RHOG STUDIO</h1>
-      <!-- Optional small tagline for extra context, no render-blocking -->
-      <span class="text-sm text-gray-400 hidden sm:inline">Design · Print · Impact</span>
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-amber-400/20 flex items-center justify-center border border-amber-400/30">
+          <span class="text-amber-400 font-extrabold text-xl">R</span>
+        </div>
+        <h1 class="text-3xl font-extrabold glow-text" style="color: #fbbf24;">RHOG STUDIO</h1>
+      </div>
+      <div class="hidden md:flex items-center gap-6 text-sm text-gray-300">
+        <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-amber-400 inline-block"></span> Graphic Design</span>
+        <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-amber-400 inline-block"></span> Large Printing</span>
+      </div>
     </div>
   </header>
 
   <section class="py-6 px-4">
     <div class="container mx-auto">
-      <div class="portfolio-category mb-10" id="pictures">
-        <h2 class="text-4xl font-extrabold text-center text-amber-400 mb-2">Our Creative Portfolio</h2>
-        <h4 class="text-2xl font-semibold text-center text-white mb-6">Pictures</h4>
-        <div class="portfolio-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-          <!-- Each item uses data-src for lazy loading. Low-quality placeholder inline? We use a tiny data:image placeholder to avoid 404 -->
-          <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-200 overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400"
-               tabindex="0" role="button" aria-pressed="false" data-type="image" data-src="RHOG BRAND ,,.jpg"
-               aria-label="View picture BRAND">
-            <img class="portfolio-img w-full h-48 object-cover rounded-t-xl" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%232a2a2a'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23666' font-family='Inter' font-size='20'%3ELoading...%3C/text%3E%3C/svg%3E" data-src="RHOG BRAND ,,.jpg" alt="BRAND" loading="lazy" />
-            <div class="portfolio-title p-3 text-center text-lg font-medium text-white">BRAND</div>
+      <div class="portfolio-category mb-10">
+        <!-- Headings with style -->
+        <div class="text-center mb-10">
+          <h2 class="text-5xl font-extrabold section-heading mb-2 tracking-tight">Our Creative Portfolio</h2>
+          <div class="flex justify-center items-center gap-3">
+            <span class="h-px w-12 bg-gradient-to-r from-transparent to-amber-400/60"></span>
+            <h4 class="text-xl font-semibold sub-heading">Pictures</h4>
+            <span class="h-px w-12 bg-gradient-to-l from-transparent to-amber-400/60"></span>
           </div>
-          <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-200 overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400"
-               tabindex="0" role="button" aria-pressed="false" data-type="image" data-src="img (1).jpg"
-               aria-label="View picture SAHPS WEEK">
-            <img class="portfolio-img w-full h-48 object-cover rounded-t-xl" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%232a2a2a'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23666' font-family='Inter' font-size='20'%3ELoading...%3C/text%3E%3C/svg%3E" data-src="img (1).jpg" alt="SAHPS WEEK" loading="lazy" />
-            <div class="portfolio-title p-3 text-center text-lg font-medium text-white">SAHPS WEEK</div>
-          </div>
-          <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-200 overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400"
-               tabindex="0" role="button" aria-pressed="false" data-type="image" data-src="img (2).jpg"
-               aria-label="View picture BIRTHDAY">
-            <img class="portfolio-img w-full h-48 object-cover rounded-t-xl" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%232a2a2a'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23666' font-family='Inter' font-size='20'%3ELoading...%3C/text%3E%3C/svg%3E" data-src="img (2).jpg" alt="BIRTHDAY DESIGN" loading="lazy" />
-            <div class="portfolio-title p-3 text-center text-lg font-medium text-white">BIRTHDAY</div>
-          </div>
-          <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-200 overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400"
-               tabindex="0" role="button" aria-pressed="false" data-type="image" data-src="img (6).jpg"
-               aria-label="View picture BANNER DESIGN">
-            <img class="portfolio-img w-full h-48 object-cover rounded-t-xl" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%232a2a2a'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23666' font-family='Inter' font-size='20'%3ELoading...%3C/text%3E%3C/svg%3E" data-src="img (6).jpg" alt="BANNER DESIGN" loading="lazy" />
-            <div class="portfolio-title p-3 text-center text-lg font-medium text-white">BANNER</div>
-          </div>
-          <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-200 overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400"
-               tabindex="0" role="button" aria-pressed="false" data-type="image" data-src="land POSSESSING AN EXCELLENT SPIRIT.jpg"
-               aria-label="View picture FLYER">
-            <img class="portfolio-img w-full h-48 object-cover rounded-t-xl" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%232a2a2a'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23666' font-family='Inter' font-size='20'%3ELoading...%3C/text%3E%3C/svg%3E" data-src="land POSSESSING AN EXCELLENT SPIRIT.jpg" alt="FLYER" loading="lazy" />
-            <div class="portfolio-title p-3 text-center text-lg font-medium text-white">FLYER</div>
-          </div>
-          <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-200 overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400"
-               tabindex="0" role="button" aria-pressed="false" data-type="image" data-src="EBOMUCHE BURIAL.jpg"
-               aria-label="View picture BOOK COVER">
-            <img class="portfolio-img w-full h-48 object-cover rounded-t-xl" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%232a2a2a'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23666' font-family='Inter' font-size='20'%3ELoading...%3C/text%3E%3C/svg%3E" data-src="EBOMUCHE BURIAL.jpg" alt="BOOK COVER" loading="lazy" />
-            <div class="portfolio-title p-3 text-center text-lg font-medium text-white">BOOK COVER</div>
-          </div>
-          <div class="portfolio-item bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-200 overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400"
-               tabindex="0" role="button" aria-pressed="false" data-type="image" data-src="img (5).jpg"
-               aria-label="View picture Concert Flyer">
-            <img class="portfolio-img w-full h-48 object-cover rounded-t-xl" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%232a2a2a'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23666' font-family='Inter' font-size='20'%3ELoading...%3C/text%3E%3C/svg%3E" data-src="img (5).jpg" alt="Concert Flyer" loading="lazy" />
-            <div class="portfolio-title p-3 text-center text-lg font-medium text-white">Concert Flyer</div>
-          </div>
-          <!-- Add an extra placeholder to fill grid nicely – but we keep 7 items as original -->
         </div>
 
-        <!-- View More CTA -->
-        <div class="text-center mt-8">
+        <!-- Grid with enhanced cards -->
+        <div class="portfolio-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <!-- Item 1 -->
+          <div class="portfolio-item group cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400/60"
+               tabindex="0" role="button" data-type="image" data-src="RHOG BRAND ,,.jpg"
+               aria-label="View picture BRAND">
+            <img class="portfolio-img w-full h-56 object-cover" 
+                 src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%231a1a1a'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23555' font-family='Inter' font-size='22'%3E⚡%3C/text%3E%3C/svg%3E" 
+                 data-src="RHOG BRAND ,,.jpg" alt="BRAND" loading="lazy" />
+            <div class="portfolio-title text-center text-white text-lg group-hover:text-amber-300 transition-colors">BRAND</div>
+          </div>
+          <!-- Item 2 -->
+          <div class="portfolio-item group cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400/60"
+               tabindex="0" role="button" data-type="image" data-src="img (1).jpg"
+               aria-label="View picture SAHPS WEEK">
+            <img class="portfolio-img w-full h-56 object-cover" 
+                 src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%231a1a1a'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23555' font-family='Inter' font-size='22'%3E✦%3C/text%3E%3C/svg%3E" 
+                 data-src="img (1).jpg" alt="SAHPS WEEK" loading="lazy" />
+            <div class="portfolio-title text-center text-white text-lg group-hover:text-amber-300 transition-colors">SAHPS WEEK</div>
+          </div>
+          <!-- Item 3 -->
+          <div class="portfolio-item group cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400/60"
+               tabindex="0" role="button" data-type="image" data-src="img (2).jpg"
+               aria-label="View picture BIRTHDAY">
+            <img class="portfolio-img w-full h-56 object-cover" 
+                 src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%231a1a1a'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23555' font-family='Inter' font-size='22'%3E🎂%3C/text%3E%3C/svg%3E" 
+                 data-src="img (2).jpg" alt="BIRTHDAY" loading="lazy" />
+            <div class="portfolio-title text-center text-white text-lg group-hover:text-amber-300 transition-colors">BIRTHDAY</div>
+          </div>
+          <!-- Item 4 -->
+          <div class="portfolio-item group cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400/60"
+               tabindex="0" role="button" data-type="image" data-src="img (6).jpg"
+               aria-label="View picture BANNER">
+            <img class="portfolio-img w-full h-56 object-cover" 
+                 src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%231a1a1a'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23555' font-family='Inter' font-size='22'%3E🖼️%3C/text%3E%3C/svg%3E" 
+                 data-src="img (6).jpg" alt="BANNER" loading="lazy" />
+            <div class="portfolio-title text-center text-white text-lg group-hover:text-amber-300 transition-colors">BANNER</div>
+          </div>
+          <!-- Item 5 -->
+          <div class="portfolio-item group cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400/60"
+               tabindex="0" role="button" data-type="image" data-src="land POSSESSING AN EXCELLENT SPIRIT.jpg"
+               aria-label="View picture FLYER">
+            <img class="portfolio-img w-full h-56 object-cover" 
+                 src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%231a1a1a'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23555' font-family='Inter' font-size='22'%3E📄%3C/text%3E%3C/svg%3E" 
+                 data-src="land POSSESSING AN EXCELLENT SPIRIT.jpg" alt="FLYER" loading="lazy" />
+            <div class="portfolio-title text-center text-white text-lg group-hover:text-amber-300 transition-colors">FLYER</div>
+          </div>
+          <!-- Item 6 -->
+          <div class="portfolio-item group cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400/60"
+               tabindex="0" role="button" data-type="image" data-src="EBOMUCHE BURIAL.jpg"
+               aria-label="View picture BOOK COVER">
+            <img class="portfolio-img w-full h-56 object-cover" 
+                 src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%231a1a1a'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23555' font-family='Inter' font-size='22'%3E📘%3C/text%3E%3C/svg%3E" 
+                 data-src="EBOMUCHE BURIAL.jpg" alt="BOOK COVER" loading="lazy" />
+            <div class="portfolio-title text-center text-white text-lg group-hover:text-amber-300 transition-colors">BOOK COVER</div>
+          </div>
+          <!-- Item 7 -->
+          <div class="portfolio-item group cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400/60"
+               tabindex="0" role="button" data-type="image" data-src="img (5).jpg"
+               aria-label="View picture Concert Flyer">
+            <img class="portfolio-img w-full h-56 object-cover" 
+                 src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%231a1a1a'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23555' font-family='Inter' font-size='22'%3E🎵%3C/text%3E%3C/svg%3E" 
+                 data-src="img (5).jpg" alt="Concert Flyer" loading="lazy" />
+            <div class="portfolio-title text-center text-white text-lg group-hover:text-amber-300 transition-colors">Concert Flyer</div>
+          </div>
+        </div>
+
+        <!-- CTA with shimmer effect -->
+        <div class="text-center mt-12">
           <a href="https://www.behance.net/gallery/227292143/FLYERS" target="_blank" rel="noopener noreferrer"
-             class="inline-block bg-amber-500 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-amber-600 hover:shadow-xl transition duration-200 ease-in-out transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-amber-400">
-            View More
+             class="cta-btn inline-block bg-amber-400 text-gray-900 font-bold py-3.5 px-10 rounded-full shadow-2xl border border-amber-300/30 transition-all duration-300 hover:bg-amber-300 focus:outline-none focus:ring-4 focus:ring-amber-400/50">
+            <span class="relative z-10 flex items-center gap-2">✨ View More on Behance <span class="text-xl">→</span></span>
           </a>
         </div>
       </div>
@@ -222,12 +330,15 @@
 
   <!-- Modal -->
   <div id="imageModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-label="Full size image viewer">
-    <span class="modal-close-btn" aria-label="Close modal">&times;</span>
-    <div class="modal-content">
-      <img id="modalImage" src="" alt="Full size image" />
+    <span class="modal-close-btn absolute top-4 right-4 text-white text-3xl cursor-pointer z-10 flex items-center justify-center w-12 h-12 rounded-full" aria-label="Close modal">&times;</span>
+    <div class="modal-content relative">
+      <img id="modalImage" src="" alt="Full size image" class="max-h-[85vh] w-auto mx-auto" />
     </div>
   </div>
 
-  <!-- Small footprint: no extra render-blocking scripts -->
+  <!-- Tiny footer for polish -->
+  <footer class="text-center text-gray-500 text-xs py-6 border-t border-white/5 mt-8">
+    <p class="container mx-auto">© 2026 RHOG STUDIO · Design & Print</p>
+  </footer>
 </body>
 </html>
